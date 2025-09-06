@@ -37,13 +37,13 @@
         let change;
         switch(person.status.name) {
             case "stable":
-                change = Math.random() * 2 - 1;
+                change = Math.random() * 1 - 1;
                 break;
             case "critical":
-                change = Math.random() * 4 - 2;
+                change = Math.random() * 2 - 2;
                 break;
             case "dying":
-                change = Math.random() * 10 - 5;
+                change = Math.random() * 4 - 5;
                 break;
         }
         person.heartRate += change;
@@ -85,10 +85,8 @@
         });
     }
 
-    // initial render
     renderPeople();
 
-    // update every 2 seconds
     setInterval(() => {
         people.forEach(updatePerson);
         renderPeople();
