@@ -1,0 +1,322 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    max-width: 100%;
+    overflow-x: none;
+}
+
+
+
+:root {
+    --white: #ffffff;
+    --dark-green: #0a3002;
+    --black: #030202;
+    --cream: #f7f2c8;
+
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow: none;
+    background-color: var(--white);
+    color: var(--black);
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    line-height: 1.5;
+    scroll-behavior: smooth;
+    scroll-padding-top: 13vh;
+}
+
+h2 {
+    font-family: 'Playfair Display', sans-serif;
+    font-size: clamp(3rem, 5vw, 7rem);
+    margin: 0;
+    font-weight: 500;
+}
+
+/*back*/
+.back-button {
+  background-color:#0a3002;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.back-button button {
+    margin-left: 2rem;
+    margin-top: 2rem;
+  padding: 0.5rem 1.25rem;
+  background-color: var(--white);
+  color: var(--dark-green);
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+.back-button button:hover {
+  background-color: #f1e9c8;
+  transform: translateY(-2px);
+}
+
+
+/*Landing with Create a User Options*/
+.components-section {
+    background-color: var(--white);
+    padding: 4vh 5vw;
+    padding-bottom: 12vh;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    color: var(--black);
+}
+
+.components-heading {
+    font-family: 'Playfair Display', serif;
+    font-weight: bold;
+    font-size: clamp(1.5rem, 2.25vw, 2.5rem);
+    margin: 0rem 0 2rem;
+}
+
+.components-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.component-tile {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border: 2px solid var(--dark-green);
+    border-radius: 8px;
+    padding: 3rem 1rem;
+    width: 360px;
+    background-color: #fff;
+    box-sizing: border-box;
+    text-align: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+    cursor: pointer;
+}
+
+.component-tile:hover,
+.component-tile:focus {
+  background-color: #f1f1f1;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px);
+}
+
+.component-icon {
+    font-size: 6rem;
+    color: var(--dark-green);
+}
+
+.component-tile h3 {
+    font-weight: bold;
+    font-size: clamp(1.5rem, 1.75vw, 1.75rem);
+    margin-top: 0.5vh;
+}
+
+.component-tile img {
+    width: 25%;
+    margin: 0px;
+}
+
+/*User Registration Form*/
+#login-section {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: none;
+  gap: 4rem;
+  padding: 0.5rem 5vw 3rem 5vw;
+  background-color: var(--dark-green);
+  font-family: 'Inter', sans-serif;
+  color:var(--white);
+  align-items: center;
+  justify-content: center;
+}
+
+.login-left {
+  flex: 2 1 40%;
+  min-width: 280px;
+}
+
+
+.login-left h2 {
+  font-family: 'Playfair Display', sans-serif;
+  /*font-size: 3rem;*/
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+}
+
+.login-left p {
+  font-size: 1rem;
+  color: var(--white);
+  max-width: 50ch;
+}
+
+.login-right {
+  flex: 1 1 40%;
+  min-width: 280px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+
+
+.lform-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.lform-group label {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: var(--gray);
+  margin-bottom: 0.5rem;
+}
+
+.lform-group input,
+.lform-group textarea {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--gray);
+  background-color: white;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: var(--black);
+  resize: vertical;
+}
+
+.lform-submit button {
+  padding: 0.75rem 2rem;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family:  'Inter', sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+.lform-submit button:hover {
+  background-color: #424242;
+}
+
+/*User Info Form*/
+#info-section {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: none;
+  gap: 4rem;
+  padding: 0.5rem 5vw 2rem 5vw;
+  background-color: var(--white);
+  font-family: 'Inter', sans-serif;
+  color: var(--dark-green);
+  align-items: center;
+  justify-content: center;
+}
+
+.info-left {
+  flex: 2 1 40%;
+  min-width: 280px;
+}
+
+
+.info-left h2 {
+  font-family: 'Playfair Display', sans-serif;
+  /*font-size: 3rem;*/
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+}
+
+.info-left p {
+  font-size: 1rem;
+  color: var(--dark-green);
+  max-width: 50ch;
+}
+
+.info-right {
+  flex: 1 1 40%;
+  min-width: 280px;
+}
+
+.info-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: var(--gray);
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--gray);
+  background-color: #0a3002dd;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: var(--white);
+  resize: vertical;
+}
+
+.form-submit button {
+  padding: 0.75rem 2rem;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family:  'Inter', sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+.form-submit button:hover {
+  background-color: #424242;
+}
+
+.form-consent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.form-consent label {
+  font-size: 0.7rem;
+  color: var(--dark-green);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.form-consent input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
