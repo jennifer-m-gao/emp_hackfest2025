@@ -53,33 +53,13 @@
 
     const areas = [
       {
-        name: 'earthquake (rough)',
+        name: 'earthquake',
         color: '#ef4444', 
         coords: [
           [47.863252, -123.254382],
           [47.863252, -121.875549],
           [47.010633, -121.875549],
           [47.010633, -123.254382]
-        ]
-      },
-      {
-        name: 'Capitol Hill (rough)',
-        color: '#10b981', 
-        coords: [
-          [47.6275, -122.3300],
-          [47.6275, -122.3050],
-          [47.6105, -122.3050],
-          [47.6105, -122.3300]
-        ]
-      },
-      {
-        name: 'Queen Anne (rough)',
-        color: '#f59e0b', 
-        coords: [
-          [47.6460, -122.3730],
-          [47.6460, -122.3550],
-          [47.6240, -122.3550],
-          [47.6240, -122.3730]
         ]
       }
     ];
@@ -92,32 +72,89 @@
         fillOpacity: 0.25
       }).addTo(map);
 
-      poly.bindPopup(`<strong>${a.name}</strong>`);
+      //poly.bindPopup(`<strong>${a.name}</strong>`);
 
-      poly.on('mouseover', () => poly.setStyle({ fillOpacity: 0.45 }));
-      poly.on('mouseout',  () => poly.setStyle({ fillOpacity: 0.25 }));
     });
 
-    const defaultMarker = L.marker([47.6205, -122.3493]) 
-      .addTo(map)
-      .bindPopup('<b>Space Needle (demo)</b><br/>Click markers & areas to see popups.');
 
-    const cafeIcon = L.divIcon({ className: 'pin', html: '☕', iconSize: [22, 22], iconAnchor: [11, 22], popupAnchor: [0, -18] });
-    L.marker([47.6121, -122.3400], { icon: cafeIcon })
-      .addTo(map)
-      .bindPopup('<b>Sample Cafe</b><br/>Custom HTML icon via <code>divIcon</code>.');
-
-    const imageIcon = L.icon({
-      iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+    var greenIcon = new L.icon({
+      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
       shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
       iconSize: [25, 41],
       iconAnchor: [12, 41],
       popupAnchor: [1, -34],
       shadowSize: [41, 41]
     });
-    L.marker([47.6090, -122.3310], { icon: imageIcon })
+
+    var redIcon = new L.icon({
+      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+      shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+
+    var yellowIcon = new L.icon({
+      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png',
+      shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+
+
+    function displayStatus(age, heartRate, injuries, needs) {
+      if (age > 60 || age < 12) {
+        return redIcon;
+      }
+
+      if (heartRate > 180 || heartRate < 40) {
+        return redIcon;
+      } else if (heartRate < 70 || heartRate > 120) {
+        return yellowIcon;
+      }
+
+      if (injuries == "severe") {
+        return redIcon;
+      } else if (injuries == "moderate") {
+        return yellowIcon;
+      }
+
+      if (needs == "high") {
+        return redIcon;
+      }
+      return greenIcon;
+
+    }
+    genderList = ["male", "female"];
+    var hr = 60 + Math.floor(Math.random()*40);
+    var gender = genderList[Math.floor(Math.random()*2)];
+    var age = 15 + Math.floor(Math.random()*70);
+
+
+    L.marker([47.6090, -122.3310], { icon: displayStatus(hr, age, "moderate", "none")})
       .addTo(map)
       .bindPopup('<b>Pike Place (demo)</b><br/>Image-based marker with shadow.');
+
+    L.marker([47.481945, -123.027649], { icon: greenIcon })
+      .addTo(map)
+      .bindPopup("Age: "+age+"<br/>Gender: "+gender+"<br/>Heart rate: " + hr + "<br/>Injuries: none<br/>Needs:");
+
+
+
+
+
+    function onMapClick(e) {
+        popup
+            .setLatLng(e.latlng)
+            .setContent("You clicked the map at " + e.latlng.toString())
+            .openOn(map);
+    }
+
+    map.on('click', onMapClick);
   </script>
+
 </body>
 </html>
