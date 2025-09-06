@@ -35,6 +35,7 @@
 </head>
 <body>
   <div id="map"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.8.0/proj4.js"></script>
   <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
@@ -62,27 +63,135 @@
           [47.010633, -123.254382]
         ]
       },
-      {
-        name: 'Capitol Hill (rough)',
-        color: '#10b981', 
-        coords: [
-          [47.6275, -122.3300],
-          [47.6275, -122.3050],
-          [47.6105, -122.3050],
-          [47.6105, -122.3300]
-        ]
-      },
-      {
-        name: 'Queen Anne (rough)',
-        color: '#f59e0b', 
-        coords: [
-          [47.6460, -122.3730],
-          [47.6460, -122.3550],
-          [47.6240, -122.3550],
-          [47.6240, -122.3730]
-        ]
-      }
     ];
+
+    /* Pulling Infrastructure Point Coordinates */
+    const fireStations = [];
+    fetch("data/Fire_Station_Locations_in_King_County___firestn_point.csv")
+      .then(response => response.text())
+      .then(text => {
+        const rows = text.trim().split("\n").map(r => r.split(","));
+        const dataRows = rows.slice(1);
+
+        const fireStations = dataRows.map(row => [row[0], row[1], row[6]]);
+
+        proj4.defs("EPSG:2285",
+          "+proj=lcc +lat_1=48.73333333333333 +lat_2=47.5 +lat_0=47 " +
+          "+lon_0=-120.8333333333333 +x_0=500000.0000000001 +y_0=0 " +
+          "+datum=NAD83 +units=us-ft +no_defs +type=crs"
+        );
+
+        fireStations.forEach(station => {
+          const x = parseFloat(station[0]); 
+          const y = parseFloat(station[1]); 
+          const name = station[2];
+
+          const [lng, lat] = proj4("EPSG:2285", "EPSG:4326", [x, y]);
+
+          console.log("Converted:", name, lat, lng);
+
+          const fireIcon = L.icon({
+            iconUrl: 'media/icons8-fire-station-50.png',
+            iconSize: [19, 19],
+            iconAnchor: [11, 22],
+            popupAnchor: [0, -18],
+          });
+
+          if (!isNaN(lat) && !isNaN(lng)) {
+            L.marker([lat, lng], { icon: fireIcon })
+              .addTo(map)
+              .bindPopup(`<b>${name}</b><br/>`);
+          }
+        });
+      });
+
+
+    const policeStations = [];
+    fetch("data/Police_Station_Locations_in_King_County___kcp_loc_point.csv")
+      .then(response => response.text())
+      .then(text => {
+        const rows = text.trim().split("\n").map(r => r.split(","));
+        const dataRows = rows.slice(1);
+
+        dataRows.forEach(row => {
+          policeStations.push([row[0], row[1], row[6]]);
+        });
+
+        console.log(policeStations);
+        proj4.defs("EPSG:2285",
+          "+proj=lcc +lat_1=48.73333333333333 +lat_2=47.5 +lat_0=47 " +
+          "+lon_0=-120.8333333333333 +x_0=500000.0000000001 +y_0=0 " +
+          "+datum=NAD83 +units=us-ft +no_defs +type=crs"
+        );
+
+        policeStations.forEach(station => {
+          const x = parseFloat(station[0]); 
+          const y = parseFloat(station[1]); 
+          const name = station[2];
+
+          const [lng, lat] = proj4("EPSG:2285", "EPSG:4326", [x, y]);
+
+          console.log("Converted:", name, lat, lng);
+
+          const policeIcon = L.icon({
+            iconUrl: 'media/icons8-police-station-50.png',
+            iconSize: [19, 19],
+            iconAnchor: [11, 22],
+            popupAnchor: [0, -18],
+          });
+
+          if (!isNaN(lat) && !isNaN(lng)) {
+            L.marker([lat, lng], { icon: policeIcon })
+              .addTo(map)
+              .bindPopup(`<b>${name}</b><br/>`);
+          }
+        });
+    });
+
+    const hospitals = [];
+    fetch("data/Medical_Facilities_including_Hospitals___medical_facilities_point.csv")
+      .then(response => response.text())
+      .then(text => {
+        const rows = text.trim().split("\n").map(r => r.split(","));
+        const dataRows = rows.slice(1);
+
+        dataRows.forEach(row => {
+          hospitals.push([row[0], row[1], row[6]]);
+        });
+
+        console.log(hospitals);
+
+        proj4.defs("EPSG:2285",
+          "+proj=lcc +lat_1=48.73333333333333 +lat_2=47.5 +lat_0=47 " +
+          "+lon_0=-120.8333333333333 +x_0=500000.0000000001 +y_0=0 " +
+          "+datum=NAD83 +units=us-ft +no_defs +type=crs"
+        );
+
+        hospitals.forEach(station => {
+          const x = parseFloat(station[0]); 
+          const y = parseFloat(station[1]); 
+          const name = station[2];
+
+          const [lng, lat] = proj4("EPSG:2285", "EPSG:4326", [x, y]);
+
+          console.log("Converted:", name, lat, lng);
+
+          const hospitalIcon = L.icon({
+            iconUrl: 'https://unpkg.com/bootstrap-icons@1.13.1/icons/hospital-fill.svg',
+            iconSize: [19, 19],
+            iconAnchor: [11, 22],
+            popupAnchor: [0, -18],
+          });
+
+          if (!isNaN(lat) && !isNaN(lng)) {
+            L.marker([lat, lng], { icon: hospitalIcon })
+              .addTo(map)
+              .bindPopup(`<b>${name}</b><br/>`);
+          }
+        });
+    });
+
+    
 
     areas.forEach(a => {
       const poly = L.polygon(a.coords, {
@@ -94,30 +203,9 @@
 
       poly.bindPopup(`<strong>${a.name}</strong>`);
 
-      poly.on('mouseover', () => poly.setStyle({ fillOpacity: 0.45 }));
-      poly.on('mouseout',  () => poly.setStyle({ fillOpacity: 0.25 }));
     });
 
-    const defaultMarker = L.marker([47.6205, -122.3493]) 
-      .addTo(map)
-      .bindPopup('<b>Space Needle (demo)</b><br/>Click markers & areas to see popups.');
-
-    const cafeIcon = L.divIcon({ className: 'pin', html: '☕', iconSize: [22, 22], iconAnchor: [11, 22], popupAnchor: [0, -18] });
-    L.marker([47.6121, -122.3400], { icon: cafeIcon })
-      .addTo(map)
-      .bindPopup('<b>Sample Cafe</b><br/>Custom HTML icon via <code>divIcon</code>.');
-
-    const imageIcon = L.icon({
-      iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-      shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41]
-    });
-    L.marker([47.6090, -122.3310], { icon: imageIcon })
-      .addTo(map)
-      .bindPopup('<b>Pike Place (demo)</b><br/>Image-based marker with shadow.');
+    proj4.defs("EPSG:2285","+proj=lcc +lat_1=48.73333333333333 +lat_2=47.5 +lat_0=47 +lon_0=-120.8333333333333 +x_0=500000.0000000001 +y_0=0 +datum=NAD83 +units=us-ft +no_defs +type=crs");
   </script>
 </body>
 </html>
