@@ -1,3 +1,4 @@
+
 const slider = document.getElementById("myRange");
 const people = document.getElementById('people');
 const nump = document.getElementById('numP');
@@ -5,7 +6,9 @@ var submissions = JSON.parse(localStorage.getItem('submissions')) || [];
 let person = {};
 let amenities = [];
 let injury = "";
-const submit = document.querySelector('button');
+
+
+
 const ams = document.querySelectorAll('#am-options .multi-choice');
 const toggle = document.getElementById('myToggle');
 submit.style.border = '0px';
@@ -27,7 +30,7 @@ slider.addEventListener('change', () => {
       color = "red";
     }
     slider.style.setProperty("--thumb-color", color);
-    person['name'] = JSON.parse(localStorage.getItem('firstName')) || 'User';
+    person['name'] = localStorage.getItem('firstName') || 'User';
     person['danger-level'] = value;
   }
   updateThumbColor(slider.value);
@@ -60,7 +63,7 @@ Array.from(ams).forEach(element => {
     else {
       amenities.push(value);
     }
-    person['name'] = JSON.parse(localStorage.getItem('firstName')) || 'User';
+    person['name'] = localStorage.getItem('firstName') || 'User';
     person["amenities"] = [...amenities];
   })
 });
@@ -78,24 +81,36 @@ people.addEventListener('change', (e) => {
   nump.textContent = people.value;
   person['num-people'] = people.value;
 })
+window.addEventListener('DOMContentLoaded', () => {
+const submit = document.getElementById('submit');
 submit.addEventListener('click', (e) => {
-  if (person['name'] == null) { person['name'] = JSON.parse(localStorage.getItem('firstName')) || 'User'; }
-  if (person['danger-level'] == null) { person['danger-level'] = "0"; }
-  if (person['amenities'] == null) { person['amenities'] = []; }
-  if (person['injury'] == null) { person['injury'] = 'no'; }
-  if (person['num-people'] == null) { person['num-people'] = '10'; }
+  // Ensure person always has defaults
+  person['name'] = person['name'] || localStorage.getItem('firstName') || 'User';
+  person['danger-level'] = person['danger-level'] || "0";
+  person['amenities'] = person['amenities'] || [];
+  person['injury'] = person['injury'] || 'no';
+  person['num-people'] = person['num-people'] || '10';
+
+  // Save submission
   submissions.push({ ...person });
   localStorage.setItem('submissions', JSON.stringify(submissions));
-  person = {};
-  document.querySelectorAll('.multi-choice').forEach(element => {
-    element.style.backgroundColor = 'white';
-  });
+
+  // Reset inputs
+  document.querySelectorAll('.multi-choice').forEach(el => el.style.backgroundColor = 'white');
   toggle.checked = false;
   slider.value = 0;
   slider.style.setProperty("--thumb-color", "#464444");
+  nump.textContent = '10';
 
+  // Clear person object AFTER resetting form
+  person = {};
 
+  // Style submit button to confirm
+
+  console.log('Submission saved!', submissions);
 });
+});
+
 
 
 
@@ -106,3 +121,4 @@ hamburger.addEventListener('click', () => {
   hamburger.classList.toggle('active');
   sidebar.classList.toggle('open');
 });
+
