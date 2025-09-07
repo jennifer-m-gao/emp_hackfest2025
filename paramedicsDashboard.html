@@ -378,7 +378,7 @@
 
     const submissions = JSON.parse(localStorage.getItem('submissions')) || [];
     function simulateSubmission(sub){
-      const name =  localStorage.getItem('firstName') || 'User';
+      const name =  JSON.parse(localStorage.getItem('firstName')) || 'User';
       const lat = 47.60 + (Math.random()-0.5)*0.1;
       const long = -122.33 + (Math.random()-0.5)*0.1;
       const gender = Math.random()>0.5?"male":"female";
@@ -433,16 +433,6 @@
       });
     }, 1500);
 
-
-
-    function onMapClick(e) {
-        L.popup()
-          .setLatLng(e.latlng)
-          .setContent("You clicked the map at " + e.latlng.toString())
-          .openOn(map);
-    }
-
-    map.on('click', onMapClick);
   </script>
 </body>
 </html>

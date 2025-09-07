@@ -4,22 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AidLink</title>
-    <link href="../styles.css" rel="stylesheet">
+    <link href='../styles.css' rel='stylesheet'>
 </head>
 <body>
-
-<nav class="navbar">
-    <div class="nav-left">
-        <img src="../media/logo.png" alt="Logo" class="logo">
-    </div>
-    <div class="nav-right">
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
+        <nav class="navbar">
+        <div class="nav-left">
+            <img src="../media/logo.png" alt="Logo" class="logo">
         </div>
-    </div>
-</nav>
+        <div class="nav-right">
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
 
 <div class="sidebar" id="sidebar">
     <ul>
@@ -30,51 +29,95 @@
     </ul>
 </div>
 
-<div>
-    <h1 id="dangerous">Choose your level of danger</h1>
-    <div class="slidecontainer">
-        <input type="range" min="0" max="5" value="0" class="slider" id="myRange">
+    <div style="margin-left:5vw; margin-top: 7vh;"class="back-button">
+        <button 
+            type="button" 
+            onclick="window.location.href='../userDashboard.html'" 
+            style="
+            -webkit-appearance: none; 
+            -moz-appearance: none;    
+            appearance: none;
+            display: inline-block;    
+            background-color: white;
+            color: #b62222;
+            border: 2px solid #b62222;
+            border-radius: 6px;
+            font-weight: bold;
+            padding: 0.5rem 1.25rem;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            transition: background-color 0.25s ease, transform 0.2s ease;
+            all: unset;             
+            ">
+            ← Back
+        </button>
     </div>
-</div>
 
-<div id="amenities">
-    <h1>Select which amenities you need</h1>
-    <div id="am-options">
-        <div class="multi-choice"><p>Water</p></div>
-        <div class="multi-choice"><p>Communication</p></div>
-        <div class="multi-choice"><p>Food</p></div>
-        <div class="multi-choice"><p>First Aid</p></div>
+
+    <section class="info-section">
+        <div class="info-left">
+            <h2>Request Emergency Help</h2>
+            <p class="animate-contact-p">
+                Please provide information about your current situation to help us dispatch the most appropriate assistance to your location.
+            </p>
+        </div>
+
+        <div class="info-right">
+            <form class="info-form">
+                <div class="form-group">
+                    <label for="danger">Danger Level (0-5)</label>
+                    <div class="slidecontainer">
+                        <input type="range" min="0" max="5" value="0" class="slider" id="myRange">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="amenities">Select Needed Amenities</label>
+                    <div id='am-options'>
+                        <div class='multi-choice'>
+                            <p>Water</p>
+                        </div>
+                        <div class='multi-choice'>
+                            <p>Communication</p>
+                        </div>
+                        <div class='multi-choice'>
+                            <p>Food</p>
+                        </div>
+                        <div class='multi-choice'>
+                            <p>First Aid</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="people">Number of People With You</label>
+                    <div class="slide-container">
+                        <input type="range" min="1" max="20" id="people">
+                        <p id='numP'>10</p>
+                    </div>
+                </div>
+
+                <div class="form-group inline-group">
+                    <label for="injuries">Do You Have Injuries?</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="myToggle">
+                        <span style="margin-left: -7px;"class="slider2"></span>
+                    </label>
+                </div>
+
+                <div class="form-submit">
+                    <button type="button" onClick="window.location.href='../userDashboard.html'">Submit Request</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <div id='test-database'> 
+        <p id='tester'></p>
     </div>
-</div>
-
-<div>
-    <h1>How many people are with you</h1>
-    <div class="slide-container">
-        <input type="range" min="1" max="20" id="people">
-        <p id="numP">10</p>
+    <div id='test'>
+        <p id='test-person'></p>
     </div>
-</div>
-
-<div class="injure">
-    <h1>Do you have injuries</h1>
-    <div id="injuries">
-        <label class="toggle-switch">
-            <input type="checkbox" id="myToggle">
-            <span class="slider2"></span>
-        </label>
-    </div> <!-- properly close #injuries -->
-</div> <!-- properly close .injure -->
-
-<div id="test-database">
-    <p id="tester"></p>
-</div>
-
-<div id="test">
-    <p id="test-person"></p>
-</div>
-
-<button type="button" id="submit">Submit</button>
-
-<script src="script.js"></script>
 </body>
 </html>
