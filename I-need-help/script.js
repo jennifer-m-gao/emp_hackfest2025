@@ -92,6 +92,7 @@ submit.addEventListener('click', (e) => {
   if (person['injury']==null) {person['injury'] = 'no';}
   if (person['num-people']==null){person['num-people']='10';}
   submissions.push({ ...person });
+  localStorage.setItem('submissions', JSON.stringify(submissions));
   testdatabase.textContent = "Current Submissions: " + JSON.stringify(submissions);
   person = {};
   testperson.textContent = "Current Entry: " + JSON.stringify(person);
