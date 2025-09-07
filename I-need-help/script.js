@@ -1,7 +1,7 @@
 const slider = document.getElementById("myRange");
 const people = document.getElementById('people');
 const nump = document.getElementById('numP');
-var submissions = [{"name":"Bob","amenities":["Communication","Food"],"danger-level":"2", "injury":'yes', 'num-people':'9'}, {"name": "Annie", "amenities": ["Communication", "Water", "First Aid"], "danger-level":"1", "injury":'yes', 'num-people':'2'}, {"name": "Julian", "danger-level": "5", "amenities": ["Communication"], "injury":'no', 'num-people':'15'}];
+var submissions = [];
 let person = {};
 let amenities = [];
 let injury = "";
@@ -17,7 +17,7 @@ submit.style.color = '#fff';
 submit.style.borderRadius = '15px';
 testperson.textContent = "Current Entry: " + JSON.stringify(person);
 slider.addEventListener('change', () => {
-function updateThumbColor(value) {
+  function updateThumbColor(value) {
     let color;
     if (value == 0) {
       color = '#464444';
@@ -52,14 +52,14 @@ Array.from(ams).forEach(element => {
     let index = 0;
     let value = p.textContent;
     let present = false;
-    for (var i = 0; i<amenities.length; i++) {
+    for (var i = 0; i < amenities.length; i++) {
       if (amenities[i] == value) {
         present = true;
         index = i;
       }
     }
     if (present) {
-      amenities.splice(index,1);
+      amenities.splice(index, 1);
     }
     else {
       amenities.push(value);
@@ -86,11 +86,11 @@ people.addEventListener('change', (e) => {
   testperson.textContent = "Current Entry: " + JSON.stringify(person);
 })
 submit.addEventListener('click', (e) => {
-  if (person['name'] == null) {person['name'] = 'John';}
-  if (person['danger-level'] == null) {person['danger-level'] = "0";}
-  if (person['amenities'] == null) {person['amenities'] = [];}
-  if (person['injury']==null) {person['injury'] = 'no';}
-  if (person['num-people']==null){person['num-people']='10';}
+  if (person['name'] == null) { person['name'] = 'John'; }
+  if (person['danger-level'] == null) { person['danger-level'] = "0"; }
+  if (person['amenities'] == null) { person['amenities'] = []; }
+  if (person['injury'] == null) { person['injury'] = 'no'; }
+  if (person['num-people'] == null) { person['num-people'] = '10'; }
   submissions.push({ ...person });
   localStorage.setItem('submissions', JSON.stringify(submissions));
   testdatabase.textContent = "Current Submissions: " + JSON.stringify(submissions);
@@ -103,8 +103,15 @@ submit.addEventListener('click', (e) => {
   slider.value = 0;
   slider.style.setProperty("--thumb-color", "#464444");
 
-  
+
 });
 
 
 
+const hamburger = document.getElementById('hamburger');
+const sidebar = document.getElementById('sidebar');
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  sidebar.classList.toggle('open');
+});
