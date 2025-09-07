@@ -186,7 +186,7 @@ h2 {
 
 /* Back Button */
 .back-button {
-    position: fixed;
+    position: absolute;
     top: 12vh;
     left: 0;
     background-color: var(--white);
@@ -386,8 +386,22 @@ h2 {
     background-color: #c49f25;
 }
 
+.page-content {
+    padding-top: 60px; 
+    padding-left: 250px; 
+    padding-right: 1rem;
+}
+
+
+
+#map {
+  flex: 1; 
+}
+
+
 .slider {
   -webkit-appearance: none;
+  appearance: none;
   width: 90%;
   height: 10px;
   border-radius: 50px;
@@ -395,10 +409,12 @@ h2 {
   outline: none;
   margin-left: 40px;
   }
+
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 20px;
   height: 20px;
+  border: none;
   border-radius: 50%;
   background: var(--thumb-color, #464444);
   cursor: pointer;
@@ -407,16 +423,29 @@ input[type="range"]::-webkit-slider-thumb {
 
 
 .multi-choice {
-  padding: 6px 12px;
-  margin: 3px;
-  border: 1px solid #000;
-  border-radius: 6px;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  text-align: center;
-  min-width: 80px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    min-width: 80px;
+    display: flex;
+    flex-direction:column;
+    justify-content: space-evenly;
+}
+
+
+.multi-choice #phone{
+    margin: 10px;
+    margin-top: 20px;
+}
+
+.multi-choice p {
+    padding-top: 10px;
 }
 
 .multi-choice:hover {
@@ -513,7 +542,7 @@ h1{
   justify-content: space-evenly;
 }
 
-/* Sidebar */
+/*sidebar */
 .sidebar {
     position: fixed;
     top: 0;
