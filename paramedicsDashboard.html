@@ -35,6 +35,7 @@
 </head>
 <body>
   <div id="map"></div>
+  <div id="peopleContainer"></div>
   <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
@@ -104,53 +105,126 @@
       shadowSize: [41, 41]
     });
 
+    const statuses = [
+        { name: "stable", minHR: 60, maxHR: 100, probability: 0.6, minTemp: 97, maxTemp: 100, icon: greenIcon},
+        { name: "critical", minHR: 40, maxHR: 60, probability: 0.3, minTemp: 95, maxTemp: 96.99, icon: yellowIcon},
+        { name: "dying", minHR: 0, maxHR: 40, probability: 0.1, minTemp: 90, maxTemp: 95, icon: redIcon}
+    ];
 
-    function displayStatus(age, heartRate, injuries, needs) {
-      if (age > 60 || age < 12) {
-        return redIcon;
-      }
-
-      if (heartRate > 180 || heartRate < 40) {
-        return redIcon;
-      } else if (heartRate < 70 || heartRate > 120) {
-        return yellowIcon;
-      }
-
-      if (injuries == "severe") {
-        return redIcon;
-      } else if (injuries == "moderate") {
-        return yellowIcon;
-      }
-
-      if (needs == "high") {
-        return redIcon;
-      }
-      return greenIcon;
-
+    function pickStatus() {
+        const randomNum = Math.floor(Math.random() * 10) + 1;
+        if (randomNum <= 7){
+            return statuses[0];
+        } else if (randomNum <= 9){
+            return statuses[1];
+        } else {
+            return statuses[2];
+        }   
     }
-    genderList = ["male", "female"];
-    var hr = 60 + Math.floor(Math.random()*40);
-    var gender = genderList[Math.floor(Math.random()*2)];
-    var age = 15 + Math.floor(Math.random()*70);
 
+    function Person(age, gender, X, Y){
+        this.age = age;
+        this.gender = gender;
+        this.X = X;
+        this.Y = Y;
+        this.status = pickStatus();
+        this.heartRate = Math.random() * (this.status.maxHR - this.status.minHR) + this.status.minHR;
+        this.bodyTemp = Math.random() * (this.status.maxTemp - this.status.minTemp) + this.status.minTemp;
+    }
 
-    L.marker([47.6090, -122.3310], { icon: displayStatus(hr, age, "moderate", "none")})
-      .addTo(map)
-      .bindPopup('<b>Pike Place (demo)</b><br/>Image-based marker with shadow.');
+    function updatePerson(person){
+        let change;
+        switch(person.status.name) {
+            case "stable":
+                change = Math.random() * 1;
+                break;
+            case "critical":
+                change = Math.random() * 2;
+                break;
+            case "dying":
+                change = Math.random() * 4;
+                break;
+        }
+        person.heartRate += change;
 
-    L.marker([47.481945, -123.027649], { icon: greenIcon })
-      .addTo(map)
-      .bindPopup("Age: "+age+"<br/>Gender: "+gender+"<br/>Heart rate: " + hr + "<br/>Injuries: none<br/>Needs:");
+        if (person.heartRate > 60){
+            person.status = statuses[0];
+        } else if (person.heartRate > 40){
+            person.status = statuses[1];
+        } else {
+            person.status = statuses[2];
+        }
 
+        let chance = Math.random();
+        switch(person.status.name){
+            case "stable":
+              if (chance > 0.5){
+                person.bodyTemp += Math.random() * 2;
+              } else {
+                person.bodyTemp -= Math.random() * 2;
+              }
+              break;
+            case "critical":
+              if (chance > 0.5){
+                person.bodyTemp += Math.random() * 3;
+              } else {
+                person.bodyTemp -= Math.random() * 3;
+              }
+              break;
+            case "dying":
+              if (chance > 0.5){
+                person.bodyTemp += Math.random() * 4;
+              } else {
+                person.bodyTemp -= Math.random() * 4;
+              }
+              break;
+        }
+        if (person.bodyTemp < 95){
+          person.status = statuses[2];
+        } else if (person.bodyTemp < 97){
+          person.status = statuses[1];
+        } else {
+          person.status = statuses[0];
+        };
+    }
 
+    const people = [];
+    const markers = [];
 
+    people.push(new Person(30, "female", 47.6062, -122.3321));
+    people.push(new Person(25, "male", 47.6205, -122.3493));
+    people.push(new Person(65, "male", 47.5952, -122.3316));
+
+    function getPopupContent(person) {
+      return `Age: ${person.age}<br/> Gender: ${person.gender}<br/> Heart rate: ${Math.round(person.heartRate)} bpm<br/> Body Temperature: ${Math.round(person.bodyTemp)}°F<br/> Status: ${person.status.name}`;
+    }
+
+    people.forEach(person => {
+      const marker = L.marker([person.X, person.Y], { icon: person.status.icon }).addTo(map);
+      marker.bindPopup(getPopupContent(person));
+      markers.push(marker);
+    });
+
+    setInterval(() => {
+      people.forEach((person, i) => {
+        updatePerson(person);
+
+        markers[i].setIcon(person.status.icon);
+        const popup = markers[i].getPopup();
+        popup.setContent(getPopupContent(person));
+
+        if (popup.isOpen()) {
+          popup.update();
+        }
+      });
+    }, 1500);
 
 
     function onMapClick(e) {
-        popup
-            .setLatLng(e.latlng)
-            .setContent("You clicked the map at " + e.latlng.toString())
-            .openOn(map);
+        L.popup()
+          .setLatLng(e.latlng)
+          .setContent("You clicked the map at " + e.latlng.toString())
+          .openOn(map);
     }
 
     map.on('click', onMapClick);
