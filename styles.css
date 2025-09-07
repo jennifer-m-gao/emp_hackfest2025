@@ -398,7 +398,7 @@ h2 {
   flex: 1; 
 }
 
-
+/* form styling */
 .slider {
   -webkit-appearance: none;
   appearance: none;
@@ -540,7 +540,7 @@ h1{
   display: flex;
   justify-content: space-evenly;
 }
-
+/* navigation styling */
 /*sidebar */
 .sidebar {
     position: fixed;
