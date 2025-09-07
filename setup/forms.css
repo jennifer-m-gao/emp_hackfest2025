@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap');
 
+/* General Styling */
 * {
     box-sizing: border-box;
     max-width: 100%;
@@ -35,7 +36,7 @@ h2 {
     font-weight: 500;
 }
 
-/*back*/
+/* Back Button */
 .back-button {
     position: fixed;
     top: 6vh;
@@ -67,7 +68,7 @@ h2 {
 }
 
 
-/*User Info Form*/
+/*Standard Form Styling*/
 .info-section {
     display: flex;
     flex-wrap: wrap;

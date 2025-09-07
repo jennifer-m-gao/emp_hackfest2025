@@ -11,4 +11,3 @@ Paramedic key-features:
 * Civillian Map: includes civillians in a disaster-struck area (based on Smartwatch and manual help data)
 * Real-time vitals: has metrics like heart rate, age, temperature, eneds, accompanying civillians, etc.
 * Urgency indicators: uses vital metrics for status (stable/critical/serious) for resource allocation and urgency
-
