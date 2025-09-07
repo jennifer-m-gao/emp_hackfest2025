@@ -5,8 +5,6 @@ var submissions = JSON.parse(localStorage.getItem('submissions')) || [];
 let person = {};
 let amenities = [];
 let injury = "";
-const testperson = document.getElementById('test-person');
-const testdatabase = document.getElementById('tester');
 const submit = document.querySelector('button');
 const ams = document.querySelectorAll('#am-options .multi-choice');
 const toggle = document.getElementById('myToggle');
@@ -15,7 +13,6 @@ submit.style.padding = '20px';
 submit.style.backgroundColor = '#136ce9ff';
 submit.style.color = '#fff';
 submit.style.borderRadius = '15px';
-testperson.textContent = "Current Entry: " + JSON.stringify(person);
 slider.addEventListener('change', () => {
   function updateThumbColor(value) {
     let color;
@@ -32,7 +29,6 @@ slider.addEventListener('change', () => {
     slider.style.setProperty("--thumb-color", color);
     person['name'] = JSON.parse(localStorage.getItem('firstName')) || 'User';
     person['danger-level'] = value;
-    testperson.textContent = "Current Entry: " + JSON.stringify(person);
   }
   updateThumbColor(slider.value);
 
@@ -66,7 +62,6 @@ Array.from(ams).forEach(element => {
     }
     person['name'] = JSON.parse(localStorage.getItem('firstName')) || 'User';
     person["amenities"] = [...amenities];
-    testperson.textContent = "Current Entry: " + JSON.stringify(person);
   })
 });
 toggle.addEventListener('change', (e) => {
@@ -77,13 +72,11 @@ toggle.addEventListener('change', (e) => {
     injury = "no";
   }
   person['injury'] = injury;
-  testperson.textContent = "Current Entry: " + JSON.stringify(person);
 });
 
 people.addEventListener('change', (e) => {
   nump.textContent = people.value;
   person['num-people'] = people.value;
-  testperson.textContent = "Current Entry: " + JSON.stringify(person);
 })
 submit.addEventListener('click', (e) => {
   if (person['name'] == null) { person['name'] = JSON.parse(localStorage.getItem('firstName')) || 'User'; }
@@ -93,9 +86,7 @@ submit.addEventListener('click', (e) => {
   if (person['num-people'] == null) { person['num-people'] = '10'; }
   submissions.push({ ...person });
   localStorage.setItem('submissions', JSON.stringify(submissions));
-  testdatabase.textContent = "Current Submissions: " + JSON.stringify(submissions);
   person = {};
-  testperson.textContent = "Current Entry: " + JSON.stringify(person);
   document.querySelectorAll('.multi-choice').forEach(element => {
     element.style.backgroundColor = 'white';
   });
