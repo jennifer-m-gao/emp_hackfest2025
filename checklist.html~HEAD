@@ -55,38 +55,37 @@
     }
 </style>
 
-<body>
-    <!--navbar-->
-    <nav class="navbar">
-        <div class="nav-left">
-            <img src="../media/logo.png" alt="Logo" class="logo">
-        </div>
-        <div class="nav-right">
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
-    <!--collapsible sidebar-->
-    <div class="sidebar" id="sidebar">
-        <ul>
-            <li><a href="../userDashboard.html">Dashboard</a></li>
-            <li><a href="checklist.html">Pre-Disaster Checklist</a></li>
-            <li><a href="../profile.html">Profile</a></li>
-            <li><a href="../I-need-help/index.html" class="help-btn">Get Help</a></li>
-        </ul>
-    </div>
-    <div class="nav-right">
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
-    </nav>
+    <body>
 
+        <nav class="navbar">
+            <div class="nav-left">
+                <img src="../media/logo.png" alt="Logo" class="logo">
+            </div>
+            <div class="nav-right">
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    
+        <div class="sidebar" id="sidebar">
+            <ul>
+<<<<<<< HEAD:checklist.html
+                <li><a href="userDashboard.html">Dashboard</a></li>
+                <li><a href="checklistform.html">Pre-Disaster Checklist</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="help.html" class="help-btn">Get Help</a></li>
+=======
+                <li><a href="../userDashboard.html">Dashboard</a></li>
+                <li><a href="checklist.html">Pre-Disaster Checklist</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../I-need-help/index.html" class="help-btn">Get Help</a></li>
+>>>>>>> checklist:Checklist/checklist.html
+            </ul>
+        </div>
+    
 
     <!--List items that redirect to amazon links. Clicking checkbox crosses the item out-->
     <div style="padding: 150px; margin-top: 5vh;">

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survival Kit Checklist</title>
+    <link rel='stylesheet' href='../styles.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<style>
+    a.list:link {
+        text-decoration: none;
+        color: black;
+    }
+
+    a.list:visited {
+        text-decoration: none;
+        color: #b62223;
+    }
+
+    a.list:hover {
+        text-decoration: underline;
+        color: red;
+    }
+
+    a.list:active {
+        text-decoration: underline;
+        color: red;
+    }
+
+    .spaced-div {
+        margin-bottom: 10px;
+    }
+
+    .spaced-right {
+        margin-right: 30px
+    }
+
+    input[type="checkbox"] {
+        accent-color: rgb(161, 3, 3);
+    }
+
+    p {
+        text-align: center;
+    }
+
+    .strikethrough:checked+label {
+        text-decoration: line-through;
+    }
+
+    .subtext {
+        font-size: small;
+    }
+</style>
+
+    <body>
+
+        <nav class="navbar">
+            <div class="nav-left">
+                <img src="media/logo.png" alt="Logo" class="logo">
+            </div>
+            <div class="nav-right">
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    
+        <div class="sidebar" id="sidebar">
+            <ul>
+                <li><a href="userDashboard.html">Dashboard</a></li>
+                <li><a href="checklistform.html">Pre-Disaster Checklist</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="help.html" class="help-btn">Get Help</a></li>
+            </ul>
+        </div>
+    
+
+    <!--List items that redirect to amazon links. Clicking checkbox crosses the item out-->
+    <div style="padding: 150px; margin-top: 5vh;">
+        <h2 style="text-align: center; font-size: 250%;">Build-Your-Own Survival Kit</h2>
+
+        <p>Click each item to shop for essential supplies</p>
+        <br>
+
+        <div class="item spaced-div">
+            <input type="checkbox" id="check1" class="strikethrough spaced-right">
+            <label for="check1">
+                <a href="https://www.amazon.com/s?k=first+aid+kit&crid=2BO673QMAKQNX&sprefix=first+aid+kit%2Caps%2C206&ref=nb_sb_noss_1"
+                    target="_blank" class="list">First Aid Kit</a>
+            </label><br>
+        </div>
+
+        <div class="item spaced-div">
+            <input type="checkbox" id="check2" class="strikethrough spaced-right">
+            <label for="check2">
+                <a href="https://www.amazon.com/s?k=gallon+water&crid=2CE4QIN5IIRPJ&sprefix=gallon+water%2Caps%2C183&ref=nb_sb_noss_1"
+                    target="_blank" class="list">4.5 Water (1 gallon/person; 0.5 gallon/person)</a>
+            </label><br>
+        </div>
+
+        <div class="item spaced-div">
+            <input type="checkbox" id="check3" class="strikethrough spaced-right">
+            <label for="check3">
+                <a href="https://www.amazon.com/s?k=non-perishable+food&crid=16ZDFLFYYQGDC&sprefix=non-per%2Caps%2C222&ref=nb_sb_ss_p13n-expert-pd-ops-ranker_ci_hl-bn-left_1_7"
+                    target="_blank" class="list">5 Non-Perishable Food</a>
+            </label><br>
+        </div>
+
+        <div class="item spaced-div">
+            <input type="checkbox" id="check4" class="strikethrough spaced-right">
+            <label for="check3">
+                <a href="https://www.amazon.com/s?k=flashlight&crid=21EJGUB55NIFX&sprefix=flashlight%2Caps%2C170&ref=nb_sb_noss_1"
+                    target="_blank" class="list">2 Flashlight</a>
+            </label><br>
+        </div>
+
+        <div class="item spaced-div">
+            <input type="checkbox" id="check5" class="strikethrough spaced-right">
+            <label for="check4">
+                <a href="https://www.amazon.com/s?k=heat+pack&crid=3SJX7QOMMA58V&sprefix=heat+pack%2Caps%2C195&ref=nb_sb_noss_1"
+                    target="_blank" class="list">4 Heat Packs</a>
+            </label><br>
+        </div>
+
+        <div class="item spaced-div">
+            <input type="checkbox" id="check6" class="strikethrough spaced-right">
+            <label for="check4">
+                <a href="https://www.amazon.com/s?k=batteries&crid=1YPOEYOIZ1AFU&sprefix=batteries%2Caps%2C214&ref=nb_sb_noss_1"
+                    target="_blank" class="list">1 Pack Batteries</a>
+            </label><br>
+        </div>
+
+        <div class="item">
+            <input type="checkbox" id="check7" class="strikethrough spaced-right">
+            <label for="check5">
+                <a href="https://www.amazon.com/s?k=handheld+radio&crid=3ITJTFR1I03OM&sprefix=handheld+radio%2Caps%2C171&ref=nb_sb_noss_1"
+                    target="_blank" class="list">1 Handheld Radio</a>
+            </label>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" id="check6" class="strikethrough spaced-right">
+            <label for="check6">
+                <a href="https://pharmacy.amazon.com/ALBUTEROL-SULFATE-VENTOLIN-ACTUATIONS-INHALER/dp/B084689JTB?ref_=sr_1_4&keywords=asthma+inhaler&crid=2M1K6NPPJ2HQ&sprefix=asthma+inhaler%2Caps%2C194&dib_tag=se&dib=eyJ2IjoiMSJ9.n2scKKtws8dwLZnu9c_gpToxRhYQikkP87aq0BX_vg7wiLo54ygQjubM-rHEHAarJcPpfWzn4dorUEoIirNFo3IwGLhv8zc2AGtGxeRMDlr25xuKJe2Aug_uv9TsK6XVS0J-K3aOgYeBxugZb7rI9O4cYtA67URPm-TNwJe2vmmfN5_9iqFzkTlP32H33wSo-heL77cmRYLMjWq3OILGawQyktIR5ga_4oXfNzs9wdul2ElSOinWFFLSsb5LpE3TtBQnU79Vs2hPI_Swp6U3YjLPm-B7xddSSqM6C4BsDEk.sw1HOqMpYuVyP5Q08SWNLxbp2sBdiZzDFjK880nEejA&qid=1757264992&sr=8-4"
+                    target="_blank" class="list">1 Inhaler</a>
+            </label>
+        </div>
+    </div>
+
+    <p class="subtext"> Survival kits are generated based off individual needs such as family size, location, and type
+        of disaster</p>
+    <!--Script for navbar-->
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            sidebar.classList.toggle('open');
+        });
+    </script>
+
+
+</body>
+
+</html>
