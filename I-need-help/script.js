@@ -5,7 +5,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const nump = document.getElementById('numP');
     const toggle = document.getElementById('myToggle');
     const ams = document.querySelectorAll('#am-options .multi-choice');
-    
+    const name = localStorage.getItem('firstName') || 'User'
     var submissions = JSON.parse(localStorage.getItem('submissions')) || [];
     let person = {};
     let amenities = [];
@@ -19,7 +19,7 @@ window.addEventListener('DOMContentLoaded', () => {
         else color = "red";
         slider.style.setProperty("--thumb-color", color);
         person['danger-level'] = value;
-        person['name'] = localStorage.getItem('firstName') || 'User';
+        
     });
 
     Array.from(ams).forEach(element => {
@@ -28,7 +28,7 @@ window.addEventListener('DOMContentLoaded', () => {
             amenities = Array.from(ams)
             .map(el => el.querySelector('p').textContent);
             person['amenities'] = [...amenities];
-            person['name'] = localStorage.getItem('firstName') || 'User';
+            
         });
     });
 
@@ -42,7 +42,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     submit.addEventListener('click', () => {
-        person['name'] = person['name'] || localStorage.getItem('firstName') || 'User';
+        person['name'] = name;
         person['danger-level'] = person['danger-level'] || "0";
         person['amenities'] = person['amenities'] || [];
         person['injury'] = person['injury'] || 'no';
