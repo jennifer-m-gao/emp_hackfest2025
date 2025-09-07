@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang = "en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Survival Kit Checklist</title>
-        <link  rel = 'stylesheet' href = '../styles.css'>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    </head>
+<html lang="en">
 
-    <style>
-        a.list:link {
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survival Kit Checklist</title>
+    <link rel='stylesheet' href='../styles.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<style>
+    a.list:link {
         text-decoration: none;
         color: black;
     }
@@ -27,56 +28,38 @@
     a.list:active {
         text-decoration: underline;
         color: red;
-        }
+    }
 
-        .spaced-div {
-            margin-bottom: 10px;
-        }
+    .spaced-div {
+        margin-bottom: 10px;
+    }
 
-        .spaced-right {
-            margin-right: 30px
-        }
-        
-        input[type="checkbox"] {
-            accent-color: rgb(161, 3, 3);
-        }
+    .spaced-right {
+        margin-right: 30px
+    }
 
-        p {
-            text-align: center;
-        }
+    input[type="checkbox"] {
+        accent-color: rgb(161, 3, 3);
+    }
 
-        .strikethrough:checked + label{
-            text-decoration: line-through;
-        }
+    p {
+        text-align: center;
+    }
 
-        .subtext {
-            font-size: small;
-        }
-        
-    </style>
+    .strikethrough:checked+label {
+        text-decoration: line-through;
+    }
 
-    <body>
+    .subtext {
+        font-size: small;
+    }
+</style>
 
-        <nav class="navbar">
-            <div class="nav-left">
-                <img src="../media/logo.png" alt="Logo" class="logo">
-            </div>
-            <div class="nav-right">
-                <div class="hamburger" id="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </nav>
-    
-        <div class="sidebar" id="sidebar">
-            <ul>
-                <li><a href="../userDashboard.html">Dashboard</a></li>
-                <li><a href="checklist.html">Pre-Disaster Checklist</a></li>
-                <li><a href="../profile.html">Profile</a></li>
-                <li><a href="../I-need-help/index.html" class="help-btn">Get Help</a></li>
-            </ul>
+<body>
+    <!--navbar-->
+    <nav class="navbar">
+        <div class="nav-left">
+            <img src="../media/logo.png" alt="Logo" class="logo">
         </div>
         <div class="nav-right">
             <div class="hamburger" id="hamburger">
@@ -87,7 +70,23 @@
         </div>
     </nav>
     <!--collapsible sidebar-->
-    
+    <div class="sidebar" id="sidebar">
+        <ul>
+            <li><a href="../userDashboard.html">Dashboard</a></li>
+            <li><a href="checklist.html">Pre-Disaster Checklist</a></li>
+            <li><a href="../profile.html">Profile</a></li>
+            <li><a href="../I-need-help/index.html" class="help-btn">Get Help</a></li>
+        </ul>
+    </div>
+    <div class="nav-right">
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    </nav>
+
 
     <!--List items that redirect to amazon links. Clicking checkbox crosses the item out-->
     <div style="padding: 150px; margin-top: 5vh;">
