@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <!--Navbar with collapsible sidebar-->
     <nav class="navbar">
         <div class="nav-left">
             <img src="media/logo.png" alt="Logo" class="logo">
@@ -22,7 +23,7 @@
             </div>
         </div>
     </nav>
-
+    <!--Collapsible sidebar-->
     <div class="sidebar" id="sidebar">
         <ul>
             <li><a href="userDashboard.html">Dashboard</a></li>
@@ -31,26 +32,27 @@
             <li><a href="I-need-help/index.html" class="help-btn">Get Help</a></li>
         </ul>
     </div>
-
+    <!--Main hero Section-->
     <div class="landing-container">
         <div class="hero-section">
             <h1 class="hero-title">AidLink</h1>
             <p class="hero-subtitle">Connecting rescuers and those in need during natural disasters</p>
         </div>
-    </nav>
+        </nav>
+        <!--Buttons that redirect to different account setup pages-->
+        <div class="action-section">
+            <div class="action-buttons">
+                <a href="setup/user.html" class="action-btn primary">
+                    <i class="fas fa-user"></i>
+                    I'm a Civilian
+                </a>
 
-    <div class="action-section">
-        <div class="action-buttons">
-            <a href="setup/user.html" class="action-btn primary">
-                <i class="fas fa-user"></i>
-                I'm a Civilian
-            </a>
-
-            <a href="setup/paramedic.html" class="action-btn secondary">
-                <i class="fas fa-briefcase-medical"></i>
-                I'm a First Responder
-            </a>
+                <a href="setup/paramedic.html" class="action-btn secondary">
+                    <i class="fas fa-briefcase-medical"></i>
+                    I'm a First Responder
+                </a>
+            </div>
         </div>
-    </div>
 </body>
+
 </html>
