@@ -83,7 +83,7 @@ window.addEventListener('DOMContentLoaded', () => {
         nump.textContent = '10';
         person = {};
     });
-
+    //nav-bar code for hamburger and sidebar
     const hamburger = document.getElementById('hamburger');
     const sidebar = document.getElementById('sidebar');
 
