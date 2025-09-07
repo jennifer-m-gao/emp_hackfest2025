@@ -378,7 +378,7 @@
 
     const submissions = JSON.parse(localStorage.getItem('submissions')) || [];
     function simulateSubmission(sub){
-      const name =  JSON.parse(localStorage.getItem('firstName')) || 'User';
+      const name =  localStorage.getItem('firstName') || 'User';
       const lat = 47.60 + (Math.random()-0.5)*0.1;
       const long = -122.33 + (Math.random()-0.5)*0.1;
       const gender = Math.random()>0.5?"male":"female";
