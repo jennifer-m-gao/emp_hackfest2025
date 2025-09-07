@@ -203,7 +203,7 @@
         }   
     }
 
-    function Person(age, gender, X, Y){
+    function Person(age, gender, X, Y, amenities, numpeople){
         this.age = age;
         this.gender = gender;
         this.X = X;
@@ -211,6 +211,8 @@
         this.status = pickStatus();
         this.heartRate = Math.random() * (this.status.maxHR - this.status.minHR) + this.status.minHR;
         this.bodyTemp = Math.random() * (this.status.maxTemp - this.status.minTemp) + this.status.minTemp;
+        this.amenities = amenities;
+        this.numpeople = numpeople;
     }
 
     function updatePerson(person){
@@ -287,26 +289,26 @@
     const people = [];
     const markers = [];
 
-    people.push(new Person(32, "female", 47.6097, -122.3331));
-    people.push(new Person(45, "male", 47.6205, -122.3493));
-    people.push(new Person(27, "female", 47.6550, -122.3080));
-    people.push(new Person(53, "male", 47.5301, -122.0326));
-    people.push(new Person(19, "female", 47.7557, -122.3415));
-    people.push(new Person(68, "male", 47.3073, -122.2285));
-    people.push(new Person(8, "female", 47.4874, -122.2171));
-    people.push(new Person(39, "male", 47.6786, -122.1316));
-    people.push(new Person(24, "female", 47.6104, -122.2007));
-    people.push(new Person(60, "male", 47.4490, -122.3088));
-    people.push(new Person(72, "female", 47.5407, -122.3877));
-    people.push(new Person(34, "male", 47.6156, -122.2119));
-    people.push(new Person(51, "female", 47.4047, -122.3243));
-    people.push(new Person(12, "male", 47.6790, -122.3870));
-    people.push(new Person(83, "female", 47.7430, -122.1731));
-    people.push(new Person(28, "female", 47.6782, -122.1760));
-    people.push(new Person(36, "male", 47.7557, -122.3076));
-    people.push(new Person(47, "female", 47.7089, -122.2030));
-    people.push(new Person(22, "male", 47.6739, -122.1215));
-    people.push(new Person(55, "female", 47.8209, -122.3151));
+    people.push(new Person(32, "female", 47.6097, -122.3331, '', '9'));
+    people.push(new Person(45, "male", 47.6205, -122.3493, '', '9'));
+    people.push(new Person(27, "female", 47.6550, -122.3080, '', '9'));
+    people.push(new Person(53, "male", 47.5301, -122.0326, '', '9'));
+    people.push(new Person(19, "female", 47.7557, -122.3415, '', '9'));
+    people.push(new Person(68, "male", 47.3073, -122.2285, '', '9'));
+    people.push(new Person(8, "female", 47.4874, -122.2171, '', '9'));
+    people.push(new Person(39, "male", 47.6786, -122.1316, '', '9'));
+    people.push(new Person(24, "female", 47.6104, -122.2007, '', '9'));
+    people.push(new Person(60, "male", 47.4490, -122.3088, '', '9'));
+    people.push(new Person(72, "female", 47.5407, -122.3877, '', '9'));
+    people.push(new Person(34, "male", 47.6156, -122.2119, '', '9'));
+    people.push(new Person(51, "female", 47.4047, -122.3243, '', '9'));
+    people.push(new Person(12, "male", 47.6790, -122.3870, '', '9'));
+    people.push(new Person(83, "female", 47.7430, -122.1731, '', '9'));
+    people.push(new Person(28, "female", 47.6782, -122.1760, '', '9'));
+    people.push(new Person(36, "male", 47.7557, -122.3076, '', '9'));
+    people.push(new Person(47, "female", 47.7089, -122.2030, '', '9'));
+    people.push(new Person(22, "male", 47.6739, -122.1215, '', '9'));
+    people.push(new Person(55, "female", 47.8209, -122.3151, '', '9'));
 
 
     function getPopupContent(person){
@@ -318,7 +320,7 @@
           <p><strong>Body Temperature:</strong> ${Math.round(person.bodyTemp)} °F</p>
           <p class="status ${person.status.name}"><strong>Status:</strong> ${person.status.name}</p>
           <p><strong>Amenities:</strong> ${person.amenities}</p>
-          <p><strong>People:</strong> ${person.people}</p>
+          <p><strong>People:</strong> ${person.numpeople}</p>
         </div>
       `; 
     }
@@ -359,7 +361,7 @@
     });
 
     setInterval(()=>{
-      const stored = JSON.parse(localStorage.getItem('submissions')) || [];
+      const stored = JSON.parse(sessionStorage.getItem('submissions')) || [];
       stored.forEach(sub=>{
         if(!sub._added){
           const p = simulateSubmission(sub);
@@ -370,7 +372,8 @@
           sub._added = true;
         }
       });
-      localStorage.setItem('submissions',JSON.stringify(stored));
+      sessionStorage.setItem('submissions',JSON.stringify(stored));
+      
 
       people.forEach((p,i)=>{
         updatePerson(p);
