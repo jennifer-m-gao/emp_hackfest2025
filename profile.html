@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>AidLink User Profile</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <style>
+        .profile{
+            display:block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .info-item{
+            padding: 5px;
+        }
+
+        .info-list{
+            text-align: left;
+            padding-left: 35%;
+        }
+
+    </style>
+
+    <body>
+        <nav class="navbar">
+            <div class="nav-left">
+                <img src="media/logo.png" alt="Logo" class="logo">
+            </div>
+
+            <div class="nav-right">
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+
+        <div class="sidebar" id="sidebar">
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="checklist.html">Pre-Disaster Checklist</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="help.html" class="help-btn">Get Help</a></li>
+            </ul>
+        </div>
+
+        <div style="padding-top: 100px; text-align: center;">
+
+            <img src="media/profile-icon.png" width="150px" class="profile">
+
+            <h2 id="display-name">Name</h2>  
+
+            <div class="info-list">
+                <ul>
+                    <li class="info-item" id="age-info">Age:</li>
+                    <li class="info-item" id="gender-info">Gender:</li>
+                    <li class="info-item" id="height-info">Height:</li>
+                    <li class="info-item" id="weight-info">Weight:</li>
+                    <li class="info-item" id="family-info">Family:</li>
+                    <li class="info-item" id="medical-info">Medical History:</li>
+                </ul>
+            </div>  
+        </div>
+
+        <script>
+            const hamburger = document.getElementById('hamburger');
+            const sidebar = document.getElementById('sidebar');
+    
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                sidebar.classList.toggle('open');
+            });
+
+            const firstName = localStorage.getItem('firstName') || "User";
+            const age = localStorage.getItem('age') || "-";
+            const gender = localStorage.getItem('gender') || "-";
+            const height = localStorage.getItem('height') || "-";
+            const weight = localStorage.getItem('weight') || "-";
+            const family = localStorage.getItem('family') || "-";
+            const medicalHistory = localStorage.getItem('age') || "none";
+
+            document.getElementById('display-name').textContent= firstName;
+            document.getElementById('age-info').textContent= 'Age: ' + age;
+            document.getElementById('gender-info').textContent= 'Gender: ' + gender;
+            document.getElementById('height-info').textContent= 'Height: ' + height;
+            document.getElementById('weight-info').textContent= 'Weight: ' + weight + "lbs";
+            document.getElementById('family-info').textContent= 'Family: ' + family + " people";
+            document.getElementById('medical-info').textContent= 'Medical History: ' + medicalHistory;
+            
+            
+        </script>
+        
+    </body>
+</html>
