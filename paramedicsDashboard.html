@@ -384,7 +384,7 @@
       const gender = Math.random()>0.5?"male":"female";
       const p = new Person(
         name,
-        JSON.parse(localStorage.getItem('age')||'10'),
+        localStorage.getItem('age')||'10',
         gender,
         lat,long,
         sub.amenities?sub.amenities.join(","):'',
