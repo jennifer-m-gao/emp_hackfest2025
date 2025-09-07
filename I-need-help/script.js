@@ -1,10 +1,7 @@
 const slider = document.getElementById("myRange");
 const people = document.getElementById('people');
 const nump = document.getElementById('numP');
-var submissions = [
-  { "name": "Bob", "amenities": ["Communication", "Food"], "danger-level": "2", "injury": 'yes', 'num-people': '9' }, 
-  { "name": "Annie", "amenities": ["Communication", "Water", "First Aid"], "danger-level": "1", "injury": 'yes', 'num-people': '2' }, 
-  { "name": "Julian", "danger-level": "5", "amenities": ["Communication"], "injury": 'no', 'num-people': '15' }];
+var submissions = [];
 let person = {};
 let amenities = [];
 let injury = "";
