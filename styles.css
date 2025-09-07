@@ -528,12 +528,12 @@ h1{
 }
 
 #people {
-  border: none;
-  background-color: #b6b6b6;
-  width: 90%;
-  height: 10px;
-  margin-top: 20px;
-  border-radius: 15px;
+    border: none;
+    background-color: #b6b6b6;
+    width: 90%;
+    height: 10px;
+    margin-top: 20px;
+    border-radius: 15px;
 }
 
 .slide-container {
