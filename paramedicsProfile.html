@@ -45,10 +45,8 @@
         <!--collapsable sidebar bar-->
         <div class="sidebar" id="sidebar">
             <ul>
-                <li><a href="userDashboard.html">Dashboard</a></li>
-                <li><a href="checklistform.html">Pre-Disaster Checklist</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="help.html" class="help-btn">Get Help</a></li>
+                <li><a href="paramedicsDashboard.html">Dashboard</a></li>
+                <li><a href="paramedicsProfile.html">Profile</a></li>
             </ul>
         </div>
 
@@ -57,17 +55,16 @@
             <img src="media/profile-icon.png" width="150px" class="profile">
 
             <!--display name and other profile info-->
-            <h2 id="display-name">Name</h2>  
+            <h2 id="display-name">Johnathan Doe</h2>  
 
             <!--display for age, gender, height, weight, etc.-->
             <div class="info-list">
                 <ul>
-                    <li class="info-item" id="age-info">Age:</li>
-                    <li class="info-item" id="gender-info">Gender:</li>
-                    <li class="info-item" id="height-info">Height:</li>
-                    <li class="info-item" id="weight-info">Weight:</li>
-                    <li class="info-item" id="family-info">Family:</li>
-                    <li class="info-item" id="medical-info">Medical History:</li>
+                    <li class="info-item" id="organization-info">Organization: Redmond Fire Department</li>
+                    <li class="info-item" id="age-info">Age: 35</li>
+                    <li class="info-item" id="gender-info">Gender: male</li>
+                    <li class="info-item" id="height-info">Height: 5'9"</li>
+                    <li class="info-item" id="weight-info">Weight: 160lbs</li>
                 </ul>
             </div>  
         </div>
@@ -82,22 +79,7 @@
                 sidebar.classList.toggle('open');
             });
 
-            //changes profile info to current user
-            const firstName = localStorage.getItem('firstName') || "User";
-            const age = localStorage.getItem('age') || "-";
-            const gender = localStorage.getItem('gender') || "-";
-            const height = localStorage.getItem('height') || "5'6\"";
-            const weight = "120";
-            const family = "4";
-            const medicalHistory = "none";
-
-            document.getElementById('display-name').textContent= firstName;
-            document.getElementById('age-info').textContent= 'Age: ' + age;
-            document.getElementById('gender-info').textContent= 'Gender: ' + gender;
-            document.getElementById('height-info').textContent= 'Height: ' + height;
-            document.getElementById('weight-info').textContent= 'Weight: ' + weight + "lbs";
-            document.getElementById('family-info').textContent= 'Family: ' + family + " people";
-            document.getElementById('medical-info').textContent= 'Medical History: ' + medicalHistory;
+            
             
             
         </script>
