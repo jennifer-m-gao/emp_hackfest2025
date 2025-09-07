@@ -42,31 +42,40 @@ window.addEventListener('DOMContentLoaded', () => {
             // element's classlist, turning it gray, otherwise if it is unselected it toggles
             // it back to white by removing selected from the classlist
             element.classList.toggle('selected');
-            
+            //goes through amenities, finds the selected elements and then creates a new array that has the p tag values inside the elements 
             amenities = Array.from(ams).filter(el => el.classList.contains('selected')).map(el => el.querySelector('p').textContent);
+            //adds the amenities list to the dictionary
             person['amenities'] = [...amenities];
             
         });
     });
 
-
+    //code for the injuries toggle
     toggle.addEventListener('change', (e) => {
+        // if checked then yes injury otherwise no
         person['injury'] = e.target.checked ? "yes" : "no";
     });
-
+    //code for number of people slider
     people.addEventListener('input', (e) => {
+        //sets the number next to the slider to the value of the slider
         nump.textContent = people.value;
+        //adds the value of the slider to the dictionary
         person['num-people'] = people.value;
     });
-
+    //code for submit button
     submit.addEventListener('click', () => {
+        //sets values for dictionary fiels, (name is set to name here once), and adds default values if a 
+        //wasn't filled out
         person['name'] = name;
         person['danger-level'] = person['danger-level'] || "0";
         person['amenities'] = person['amenities'] || [];
         person['injury'] = person['injury'] || 'no';
         person['num-people'] = person['num-people'] || '10';
+        //adds the dictionary to the submission array as another entry
         submissions.push({ ...person });
+        //saves the submissions array to local storage for use else where
         localStorage.setItem('submissions', JSON.stringify(submissions));
+        //resets form
         ams.forEach(el => el.classList.remove('selected'));
         toggle.checked = false;
         slider.value = 0;
