@@ -131,12 +131,21 @@
       color: rgb(201, 38, 38);
       border-width: 3px;
       width: 40vw;
-      height: 7vh;
+      height: fit-content;
       margin-top: 1.5vh;
       font-size: 125%;
       left: 35%;
       z-index: 1000;
   }
+
+  .x-button {
+      position:fixed;
+      margin-top: 2.0vh;
+      color: rgb(201, 38, 38);
+      border:none;
+      left: 35.5%;
+      z-index:9999;
+    }
 
   back-button {
         background-color: var(--white);
@@ -169,7 +178,8 @@
   </style>
 </head>
 <body>
-  <button class="alert">ALERT! 5.0 magnitude earthquake reported in the Pudget Sound region!</button>
+  <button class="alert" id = "alert-button">ALERT! 5.0 magnitude earthquake reported in the Pudget Sound region!</button>
+  <button class = "x-button" id = "close-button" onclick="removeAlert()"><b>x</b></button>
   <div class="layout">
     <div class="sidebar-left">
       <div class="sidebar-logo">
@@ -347,8 +357,8 @@
           <p><strong>Heart rate:</strong> ${Math.round(person.heartRate)} bpm</p>
           <p><strong>Body Temperature:</strong> ${Math.round(person.bodyTemp)} °F</p>
           <p class="status ${person.status.name}"><strong>Status:</strong> ${person.status.name}</p>
-          <p><strong>Amenities:</strong> ${person.amenities}</p>
-          <p><strong>People:</strong> ${person.numpeople}</p>
+          <p><strong>Needs:</strong> ${person.amenities}</p>
+          <p><strong>People With Them:</strong> ${person.numpeople}</p>
         </div>
       `; 
     }
@@ -379,15 +389,11 @@
 
     const submissions = JSON.parse(localStorage.getItem('submissions')) || [];
     function simulateSubmission(sub){
-      const name = localStorage.getItem('firstName') || 'User';
+      const name = sub.name;
       const lat = 47.688777;
       const long = -122.150111;
       const gender = localStorage.getItem('gender') || (Math.random() > 0.5 ? "male" : "female");
       console.log(localStorage.getItem('gender'));
-      const name =  sub.name;
-      const lat = 47.60 + (Math.random()-0.5)*0.1;
-      const long = -122.33 + (Math.random()-0.5)*0.1;
-      const gender = Math.random()>0.5?"male":"female";
       const p = new Person(
         name,
         localStorage.getItem('age')||'10',
@@ -438,6 +444,11 @@
         if(popup.isOpen()) popup.update();
       });
     }, 1500);
+
+    function removeAlert() {
+      document.getElementById("alert-button").style.display = 'none';
+      document.getElementById("close-button").style.display = 'none';
+    }
 
   </script>
 </body>

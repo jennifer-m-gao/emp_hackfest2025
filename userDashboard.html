@@ -155,7 +155,7 @@
 
 <body>
   <button class="alert" id="alert-button">ALERT! 5.0 magnitude earthquake reported in your region!</button>
-  <button class = "x-button" id = "x" onclick="removeAlert()"><b>x</b></button>
+  <button style="cursor:pointer;" class="x-button" id="x" onclick="removeAlert()"><b>x</b></button>
 
   <div class="layout">
 
@@ -168,9 +168,6 @@
         <li><a href="../Checklist/checklistform.html">Pre-Disaster Checklist</a></li>
         <li><a href="profile.html">Profile</a></li>
         <li><a href="../I-need-help/index.html" class="help-btn">Get Help</a></li>
-        <button onclick="localStorage.clear(); alert('Local storage cleared!');">
-          Clear Storage
-        </button>
         <div class="back-button">
             <button type="button" onclick="window.location.href='index.html'">
                 ← Logout
@@ -191,7 +188,7 @@
       maxZoom: 16,
       zoomControl: true,
       dragging: true,
-    }).setView([47.6062, -122.3321], 9);
+    }).setView([47.7062, -122.1321], 11.3);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
@@ -203,10 +200,10 @@
         name: 'EARTHQUAKE ZONE',
         color: '#ef4444',
         coords: [
-          [47.863252, -123.254382],
+          [47.863252, -122.474382],
           [47.863252, -121.875549],
           [47.010633, -121.875549],
-          [47.010633, -123.254382]
+          [47.010633, -122.474382]
         ]
       },
     ];
