@@ -1,11 +1,15 @@
 const slider = document.getElementById("myRange");
-var submissions = [];
+const people = document.getElementById('people');
+const nump = document.getElementById('numP');
+var submissions = [{"name":"Bob","amenities":["Communication","Food"],"danger-level":"2", "injury":'yes', 'num-people':'9'}, {"name": "Annie", "amenities": ["Communication", "Water", "First Aid"], "danger-level":"1", "injury":'yes', 'num-people':'2'}, {"name": "Julian", "danger-level": "5", "amenities": ["Communication"], "injury":'no', 'num-people':'15'}];
 let person = {};
 let amenities = [];
+let injury = "";
 const testperson = document.getElementById('test-person');
 const testdatabase = document.getElementById('tester');
 const submit = document.querySelector('button');
 const ams = document.querySelectorAll('#am-options .multi-choice');
+const toggle = document.getElementById('myToggle');
 submit.style.border = '0px';
 submit.style.padding = '20px';
 submit.style.backgroundColor = '#136ce9ff';
@@ -65,17 +69,40 @@ Array.from(ams).forEach(element => {
     testperson.textContent = "Current Entry: " + JSON.stringify(person);
   })
 });
-
-submit.addEventListener('click', (e) => {
-  if (person['name'] == null || person['danger-level'] == null || person['amenities'] == null) {
-    alert('One or more fields are not filled out');
+toggle.addEventListener('change', (e) => {
+  if (e.target.checked) {
+    injury = "yes";
   }
   else {
+    injury = "no";
+  }
+  person['injury'] = injury;
+  testperson.textContent = "Current Entry: " + JSON.stringify(person);
+});
+
+people.addEventListener('change', (e) => {
+  nump.textContent = people.value;
+  person['num-people'] = people.value;
+  testperson.textContent = "Current Entry: " + JSON.stringify(person);
+})
+submit.addEventListener('click', (e) => {
+  if (person['name'] == null) {person['name'] = 'John';}
+  if (person['danger-level'] == null) {person['danger-level'] = "0";}
+  if (person['amenities'] == null) {person['amenities'] = [];}
+  if (person['injury']==null) {person['injury'] = 'no';}
+  if (person['num-people']==null){person['num-people']='10';}
   submissions.push({ ...person });
   testdatabase.textContent = "Current Submissions: " + JSON.stringify(submissions);
   person = {};
   testperson.textContent = "Current Entry: " + JSON.stringify(person);
-  }
+  document.querySelectorAll('.multi-choice').forEach(element => {
+    element.style.backgroundColor = 'white';
+  });
+  toggle.checked = false;
+  slider.value = 0;
+  slider.style.setProperty("--thumb-color", "#464444");
+
+  
 });
 
 
