@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8" />
-
+  <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Seattle Map – draggable, colored areas, clickable icons</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <title>User Dashboard</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   <style>
+    /* General Styling */
     html, body { 
       height: 100%; 
       margin: 0; 
       font-family: 'Inter', sans-serif;
     }
 
-    /*dif sidebar*/
+    /* Sidebar Styling & Layout */
     .layout {
       display: flex;
-      height: 100vh; /* full height */
+      height: 100vh;
     }
     .sidebar-left {
         width: 250px;
@@ -78,7 +76,7 @@
       width: 100%;
     }
 
-
+    /* Map Popup Styling */
     .leaflet-popup-content-wrapper {
       background: #1e293b;  
       color: #f1f5f9;       
@@ -90,7 +88,6 @@
       background: #1e293b;   
     }
 
-
     .leaflet-popup-content { font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
 
     .popup-content {
@@ -101,6 +98,7 @@
       margin: 4px 0;
     }
 
+    /* Alert Popup Styling */
     .alert {
         position:fixed;
         border-color: rgb(201, 38, 38);
@@ -123,6 +121,7 @@
       z-index:9999;
     }
 
+    /* Logout Button Styling */
     .back-button {
         background-color: var(--white);
         width: 100%;
@@ -154,19 +153,21 @@
 </head>
 
 <body>
+  <!--Alert Popup-->
   <button class="alert" id="alert-button">ALERT! 5.0 magnitude earthquake reported in your region!</button>
-  <button class = "x-button" id = "x" onclick="removeAlert()"><b>x</b></button>
+  <button style="cursor:pointer;" class="x-button" id="x" onclick="removeAlert()"><b>x</b></button>
 
+  <!-- Main Layout with Sidebar and Map -->
   <div class="layout">
-
+    <!--Sidebar-->
     <div class="sidebar-left">
       <div class="sidebar-logo">
         <img src="media/logo.png" alt="Logo">
       </div>
       <ul>
         <li><a href="userDashboard.html">Dashboard</a></li>
-        <li><a href="../Checklist/checklist.html">Pre-Disaster Checklist</a></li>
-        <li><a href="userDashboard.html">Profile</a></li>
+        <li><a href="../Checklist/checklistform.html">Pre-Disaster Checklist</a></li>
+        <li><a href="profile.html">Profile</a></li>
         <li><a href="../I-need-help/index.html" class="help-btn">Get Help</a></li>
         <div class="back-button">
             <button type="button" onclick="window.location.href='index.html'">
@@ -175,20 +176,20 @@
         </div>
       </ul>
     </div>
-
+    <!--Map-->
     <div id="map"></div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.8.0/proj4.js"></script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script>
+    /* Initializing Map */
     const yourName = localStorage.getItem('firstName') || 'User';
     const map = L.map('map', {
       minZoom: 10,
       maxZoom: 16,
       zoomControl: true,
       dragging: true,
-    }).setView([47.6062, -122.3321], 9);
+    }).setView([47.7062, -122.1321], 11.3);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
@@ -200,10 +201,10 @@
         name: 'EARTHQUAKE ZONE',
         color: '#ef4444',
         coords: [
-          [47.863252, -123.254382],
+          [47.863252, -122.474382],
           [47.863252, -121.875549],
           [47.010633, -121.875549],
-          [47.010633, -123.254382]
+          [47.010633, -122.474382]
         ]
       },
     ];
@@ -347,7 +348,7 @@
       });
 
 
-
+    /* Plotting Danger Zones */
     areas.forEach(a => {
       const poly = L.polygon(a.coords, {
         color: a.color,
@@ -368,17 +369,37 @@
       popupAnchor: [1, -34],
       shadowSize: [41, 41]
     });
+
+    /* Pulling & Plotting User Info from Local Storage */
+    const submissions = JSON.parse(localStorage.getItem('submissions')) || [];
+    let amenities = 'None';
+    let numPeople = 0;
+    submissions.forEach(sub => {
+      amenities = (sub.amenities && sub.amenities.length > 0) 
+        ? sub.amenities.join(", ") 
+        : 'None';
+      numPeople = parseInt(sub['num-people']);
+    });
+
+    const age = localStorage.getItem('age');
+    const gender = localStorage.getItem('gender');
     L.marker([47.688777, -122.150111], { icon: imageIcon })
       .addTo(map)
-      .bindPopup(`<b> ${yourName} <br /> Current Location</b><br/>`);
+      .bindPopup(`<div class="popup-content">
+          <p><strong>Name:</strong> ${yourName}</p>
+          <p><strong>Age:</strong> ${age}</p>
+          <p><strong>Gender:</strong> ${gender}</p>
+          <p><strong>Needs:</strong> ${amenities}</p>
+          <p><strong>People With Them:</strong> ${numPeople}</p>
+        </div>`);
 
     proj4.defs("EPSG:2285", "+proj=lcc +lat_1=48.73333333333333 +lat_2=47.5 +lat_0=47 +lon_0=-120.8333333333333 +x_0=500000.0000000001 +y_0=0 +datum=NAD83 +units=us-ft +no_defs +type=crs");
     
+    /* Alert Popup Dismissal */
     function removeAlert() {
       document.getElementById("alert-button").style.display = 'none';
       document.getElementById("x").style.display = 'none';
     }
   </script>
 </body>
-
 </html>

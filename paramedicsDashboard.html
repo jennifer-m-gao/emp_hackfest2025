@@ -3,15 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Seattle Map – draggable, colored areas, clickable icons</title>
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""
-  />
+  <title>Paramedic Dashboard</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <style>
+    /* General Styles */
     html, body { 
       height: 100%; 
       margin: 0; 
@@ -19,10 +15,10 @@
     }
     #map { height: 100%; width: 80%; }
 
-    /*dif sidebar*/
+    /* Dashboard Sidebar & Layout */
     .layout {
       display: flex;
-      height: 100vh; /* full height */
+      height: 100vh;
     }
     .sidebar-left {
         width: 250px;
@@ -82,13 +78,12 @@
         padding-right: 1rem;
     }
 
-
-
     #map {
-      flex: 1; /* take up remaining space */
+      flex: 1;
     }
 
 
+    /* Map Popup Styling */
     .leaflet-popup-content-wrapper {
       background: #1e293b;  
       color: #f1f5f9;       
@@ -101,58 +96,60 @@
       background: #1e293b;   
     }
 
-
     .leaflet-popup-content { font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
 
     .popup-content {
-    font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  }
-
-  .popup-content p {
-    margin: 4px 0;
-  }
-
-  .status.stable {
-    color: #22c55e; 
-    font-weight: bold;
-  }
-  .status.serious {
-    color: #eab308; 
-    font-weight: bold;
-  }
-  .status.critical {
-    color: #ef4444;
-    font-weight: bold;
-  }
-
-  .alert {
-      position:fixed;
-      border-color: rgb(201, 38, 38);
-      color: rgb(201, 38, 38);
-      border-width: 3px;
-      width: 40vw;
-      height: fit-content;
-      margin-top: 1.5vh;
-      font-size: 125%;
-      left: 35%;
-      z-index: 1000;
-  }
-
-  .x-button {
-      position:fixed;
-      margin-top: 2.0vh;
-      color: rgb(201, 38, 38);
-      border:none;
-      left: 35.5%;
-      z-index:9999;
+      font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
     }
 
-  back-button {
-        background-color: var(--white);
-        width: 100%;
-        display: flex;
-        justify-content: flex-start;
+    .popup-content p {
+      margin: 4px 0;
     }
+
+    /* Color Coding Text by Status */
+    .status.stable {
+      color: #22c55e; 
+      font-weight: bold;
+    }
+    .status.serious {
+      color: #eab308; 
+      font-weight: bold;
+    }
+    .status.critical {
+      color: #ef4444;
+      font-weight: bold;
+    }
+
+    /* Alert Popup Styling */
+    .alert {
+        position:fixed;
+        border-color: rgb(201, 38, 38);
+        color: rgb(201, 38, 38);
+        border-width: 3px;
+        width: 40vw;
+        height: fit-content;
+        margin-top: 1.5vh;
+        font-size: 125%;
+        left: 35%;
+        z-index: 1000;
+    }
+
+    .x-button {
+        position:fixed;
+        margin-top: 2.0vh;
+        color: rgb(201, 38, 38);
+        border:none;
+        left: 35.5%;
+        z-index:9999;
+      }
+    
+    /* Logout Button Styling */
+    .back-button {
+          background-color: var(--white);
+          width: 100%;
+          display: flex;
+          justify-content: flex-start;
+      }
 
     .back-button button {
         margin-top: 40vh;
@@ -178,9 +175,13 @@
   </style>
 </head>
 <body>
+  <!--Alert Popup-->
   <button class="alert" id = "alert-button">ALERT! 5.0 magnitude earthquake reported in the Pudget Sound region!</button>
   <button class = "x-button" id = "close-button" onclick="removeAlert()"><b>x</b></button>
+
+  <!--Dashboard Layout-->
   <div class="layout">
+    <!--Sidebar-->
     <div class="sidebar-left">
       <div class="sidebar-logo">
         <img src="media/logo.png" alt="Logo">
@@ -196,19 +197,20 @@
       </ul>
     </div>
 
+    <!--Map-->
     <div id="map"></div>
   </div>
-  <div id="peopleContainer"></div>
   <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""
   ></script>
   <script>
+    /* Initializing Map */
     const map = L.map('map', {
       zoomControl: true, 
       dragging: true,   
-    }).setView([47.6062, -122.3321], 9);
+    }).setView([47.7062, -122.1321], 11.3);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
@@ -220,10 +222,10 @@
         name: 'earthquake',
         color: '#ef4444', 
         coords: [
-          [47.863252, -123.254382],
+          [47.863252, -122.474382],
           [47.863252, -121.875549],
           [47.010633, -121.875549],
-          [47.010633, -123.254382]
+          [47.010633, -122.474382]
         ]
       }
     ];
@@ -237,6 +239,7 @@
       }).addTo(map)
     });
 
+    /* Person Object and Status Simulation */
     const greenIcon = new L.icon({ iconUrl:'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png', shadowUrl:'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png', iconSize:[25,41], iconAnchor:[12,41], popupAnchor:[1,-34], shadowSize:[41,41] });
     const yellowIcon = new L.icon({ iconUrl:'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png', shadowUrl:'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png', iconSize:[25,41], iconAnchor:[12,41], popupAnchor:[1,-34], shadowSize:[41,41] });
     const redIcon = new L.icon({ iconUrl:'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png', shadowUrl:'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png', iconSize:[25,41], iconAnchor:[12,41], popupAnchor:[1,-34], shadowSize:[41,41] });
@@ -263,7 +266,7 @@
         this.age = age;
         this.gender = gender;
         this.X = X;
-        this.Y = Y;
+        this.Y = Y; 
         this.status = pickStatus();
         this.heartRate = Math.random() * (this.status.maxHR - this.status.minHR) + this.status.minHR;
         this.bodyTemp = Math.random() * (this.status.maxTemp - this.status.minTemp) + this.status.minTemp;
@@ -271,6 +274,7 @@
         this.numpeople = numpeople;
     }
 
+    /* Simulate Health Metrics & Status */
     function updatePerson(person){
         let change;
         switch(person.status.name) {
@@ -291,7 +295,6 @@
             person.heartRate += change;
         }
 
-        // Clamp heartRate to realistic range (20–200 bpm)
         if (person.heartRate < 20) person.heartRate = 20;
         if (person.heartRate > 200) person.heartRate = 200;
 
@@ -328,7 +331,6 @@
               break;
         }
 
-        // Clamp bodyTemp to realistic human range (80–110 °F)
         if (person.bodyTemp < 80) person.bodyTemp = 80;
         if (person.bodyTemp > 110) person.bodyTemp = 110;
 
@@ -342,30 +344,9 @@
     }
 
 
+    /* Adding People & Markers to Map */
     const people = [];
     const markers = [];
-
-  people.push(new Person('Angela', 32, "female", 47.6097, -122.3331, '', '9'));
-  people.push(new Person('James', 45, "male", 47.6205, -122.3493, '', '9'));
-  people.push(new Person('Selena', 27, "female", 47.6550, -122.3080, '', '9'));
-  people.push(new Person('Johnathon', 53, "male", 47.5301, -122.0326, '', '9'));
-  people.push(new Person('Rihanna', 19, "female", 47.7557, -122.3415, '', '9'));
-  people.push(new Person('Oliver', 68, "male", 47.3073, -122.2285, '', '9'));
-  people.push(new Person('Poppy', 8, "female", 47.4874, -122.2171, '', '9'));
-  people.push(new Person('Taj', 39, "male", 47.6786, -122.1316, '', '9'));
-  people.push(new Person('Carla', 24, "female", 47.6104, -122.2007, '', '9'));
-  people.push(new Person('Gibson', 60, "male", 47.4490, -122.3088, '', '9'));
-  people.push(new Person('Rhonda', 72, "female", 47.5407, -122.3877, '', '9'));
-  people.push(new Person('Tyler', 34, "male", 47.6156, -122.2119, '', '9'));
-  people.push(new Person('Vivian', 51, "female", 47.4047, -122.3243, '', '9'));
-  people.push(new Person('Aditya', 12, "male", 47.6790, -122.3870, '', '9'));
-  people.push(new Person('Betty', 83, "female", 47.7430, -122.1731, '', '9'));
-  people.push(new Person('Kiara', 28, "female", 47.6782, -122.1760, '', '9'));
-  people.push(new Person('Brett', 36, "male", 47.7557, -122.3076, '', '9'));
-  people.push(new Person('Brook', 47, "female", 47.7089, -122.2030, '', '9'));
-  people.push(new Person('Jim', 22, "male", 47.6739, -122.1215, '', '9'));
-  people.push(new Person('Emma', 55, "female", 47.8209, -122.3151, '', '9'));
-
 
     function getPopupContent(person){
       return `
@@ -376,22 +357,44 @@
           <p><strong>Heart rate:</strong> ${Math.round(person.heartRate)} bpm</p>
           <p><strong>Body Temperature:</strong> ${Math.round(person.bodyTemp)} °F</p>
           <p class="status ${person.status.name}"><strong>Status:</strong> ${person.status.name}</p>
-          <p><strong>Amenities:</strong> ${person.amenities}</p>
-          <p><strong>People:</strong> ${person.numpeople}</p>
+          <p><strong>Needs:</strong> ${person.amenities}</p>
+          <p><strong>People With Them:</strong> ${person.numpeople}</p>
         </div>
       `; 
     }
 
-
+    /* Sample People */
     people.push(new Person('Wendy',32,"female",47.6097,-122.3331,"food, water, communication",2));
     people.push(new Person('Richard',45,"male",47.6205,-122.3493,"first aid",7));
+    people.push(new Person('Angela', 32, "female", 47.6097, -122.3331, 'food', '1'));
+    people.push(new Person('James', 45, "male", 47.6205, -122.3493, 'water', '2'));
+    people.push(new Person('Selena', 27, "female", 47.6550, -122.3080, 'water', '3'));
+    people.push(new Person('Johnathon', 53, "male", 47.5301, -122.0326, 'water, communication', '4'));
+    people.push(new Person('Rihanna', 19, "female", 47.7557, -122.3415, 'firstaid', '5'));
+    people.push(new Person('Oliver', 68, "male", 47.3073, -122.2285, 'firstaid', '9'));
+    people.push(new Person('Poppy', 8, "female", 47.4874, -122.2171, 'water', '1'));
+    people.push(new Person('Taj', 39, "male", 47.6786, -122.1316, 'firstaid, food', '2'));
+    people.push(new Person('Carla', 24, "female", 47.6104, -122.2007, 'water, food', '4'));
+    people.push(new Person('Gibson', 60, "male", 47.4490, -122.3088, 'water', '2'));
+    people.push(new Person('Rhonda', 72, "female", 47.5407, -122.3877, 'water, communication', '8'));
+    people.push(new Person('Tyler', 34, "male", 47.6156, -122.2119, 'food, water', '4'));
+    people.push(new Person('Vivian', 51, "female", 47.4047, -122.3243, 'water, communication', '9'));
+    people.push(new Person('Aditya', 12, "male", 47.6790, -122.3870, 'food', '1'));
+    people.push(new Person('Betty', 83, "female", 47.7430, -122.1731, 'water', '2'));
+    people.push(new Person('Kiara', 28, "female", 47.6782, -122.1760, 'firstaid', '4'));
+    people.push(new Person('Brett', 36, "male", 47.7557, -122.3076, 'food, firstaid', '3'));
+    people.push(new Person('Brook', 47, "female", 47.7089, -122.2030, 'water', '5'));
+    people.push(new Person('Jim', 22, "male", 47.6739, -122.1215, 'water', '2'));
+    people.push(new Person('Emma', 55, "female", 47.8209, -122.3151, 'water', '1'));
 
+    /* Adding Submission from Local Storage */
     const submissions = JSON.parse(localStorage.getItem('submissions')) || [];
     function simulateSubmission(sub){
-      const name =  JSON.parse(localStorage.getItem('firstName')) || 'User';
-      const lat = 47.60 + (Math.random()-0.5)*0.1;
-      const long = -122.33 + (Math.random()-0.5)*0.1;
-      const gender = Math.random()>0.5?"male":"female";
+      const name = sub.name;
+      const lat = 47.688777;
+      const long = -122.150111;
+      const gender = localStorage.getItem('gender') || (Math.random() > 0.5 ? "male" : "female");
+      console.log(localStorage.getItem('gender'));
       const p = new Person(
         name,
         localStorage.getItem('age')||'10',
@@ -413,12 +416,14 @@
       people.push(p);
     });
 
+    /* Adding Markers to Map */
     people.forEach(person=>{
       const marker = L.marker([person.X, person.Y], { icon: person.status.icon }).addTo(map);
       marker.bindPopup(getPopupContent(person));
       markers.push(marker);
     });
 
+    /* Updating Health Metrics & Status Every 1.5 Seconds */
     setInterval(()=>{
       const stored = JSON.parse(localStorage.getItem('submissions')) || [];
       stored.forEach(sub=>{
@@ -432,7 +437,6 @@
         }
       });
       localStorage.setItem('submissions',JSON.stringify(stored));
-      
 
       people.forEach((p,i)=>{
         updatePerson(p);
@@ -443,6 +447,7 @@
       });
     }, 1500);
 
+    /* Remove Alert Button */
     function removeAlert() {
       document.getElementById("alert-button").style.display = 'none';
       document.getElementById("close-button").style.display = 'none';

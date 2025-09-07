@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap');
 
+/* General Styling */
 * {
     box-sizing: border-box;
     max-width: 100%;
     overflow-x: hidden;
 }
-
 
 
 :root {
@@ -75,7 +75,6 @@ h2 {
     transition: all 0.3s ease;
 }
 
-/*X */
 .hamburger.active span:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
 }
@@ -185,9 +184,9 @@ h2 {
 }
 
 
-/*back*/
+/* Back Button */
 .back-button {
-    position: fixed;
+    position: absolute;
     top: 12vh;
     left: 0;
     background-color: var(--white);
@@ -217,7 +216,6 @@ h2 {
 }
 
 
-
 /*User Info Form*/
 .info-section {
     display: flex;
@@ -240,7 +238,6 @@ h2 {
 
 .info-left h2 {
     font-family: 'Playfair Display', sans-serif;
-    /*font-size: 3rem;*/
     margin: 0 0 1rem 0;
     line-height: 1.2;
 }
@@ -332,10 +329,10 @@ h2 {
 }
 
 
-/*dif sidebar*/
+/* Sidebar Styling */
 .layout {
   display: flex;
-  height: 100vh; /* full height */
+  height: 100vh;
 }
 .sidebar-left {
     width: 250px;
@@ -398,12 +395,13 @@ h2 {
 
 
 #map {
-  flex: 1; /* take up remaining space */
+  flex: 1; 
 }
 
 
 .slider {
   -webkit-appearance: none;
+  appearance: none;
   width: 90%;
   height: 10px;
   border-radius: 50px;
@@ -411,41 +409,51 @@ h2 {
   outline: none;
   margin-left: 40px;
   }
-input[type = 'range']::-webkit-slider-thumb {
+
+input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background-color: var(--thumb-color, #464444);
-  accent-color: var(--thumb-color, #464444);
-  }
-input[type="range"]::-webkit-range-thumb {
   width: 20px;
   height: 20px;
+  border: none;
   border-radius: 50%;
-  background: var(--thumb-color, #000);
+  background: var(--thumb-color, #464444);
   cursor: pointer;
-  }
+  border: none;
+}
+
+
 .multi-choice {
-  padding: 6px 12px;
-  margin: 3px;
-  border: 1px solid #000;
-  border-radius: 6px;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  text-align: center;
-  min-width: 80px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    min-width: 80px;
+    display: flex;
+    flex-direction:column;
+    justify-content: space-evenly;
+}
+
+
+.multi-choice #phone{
+    margin: 10px;
+    margin-top: 20px;
+}
+
+.multi-choice p {
+    padding-top: 10px;
 }
 
 .multi-choice:hover {
   background-color: #f0f0f0;
 }
-
+/* the class that is added to multi-choice element's classlist if element is selected, turning it gray */
 .multi-choice.selected {
-  background-color: var(--dark-green);
-  color: white;
+  background-color: rgb(83, 83, 83);
 }
 
 #am-options {
@@ -534,7 +542,7 @@ h1{
   justify-content: space-evenly;
 }
 
-/* Sidebar */
+/*sidebar */
 .sidebar {
     position: fixed;
     top: 0;

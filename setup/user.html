@@ -4,18 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AidLink</title>
-    <link rel="stylesheet" href="../styles.css">
+    <title>User Signup Form</title>
+    <link rel="stylesheet" href="forms.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
-
 <body>
+    <!--Back Button-->
     <div class="back-button">
         <button type="button" onclick="window.location.href='../index.html'">
             ← Back
         </button>
     </div>
 
+    <!--Page Content-->
     <section class="info-section">
         <div class="info-left">
             <h2>Create an Account</h2>
@@ -24,22 +25,22 @@
                 disaster relief!
             </p>
         </div>
-
+        <!--Account Form-->
         <div class="info-right">
             <form class="info-form">
                 <div class="form-group">
-                    <label for="firstName">First Name</label>
+                    <label for="firstName">Full Name</label>
                     <input type="text" name="firstName" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" name="lastName" required>
                 </div>
 
                 <div class="form-group">
                     <label for="age">Age</label>
                     <input type="number" name="age" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <input type="text" name="gender" required>
                 </div>
 
                 <div class="form-group">
@@ -60,11 +61,14 @@
         </div>
     </section>
     <script>
+        /* User Info Storage and Redirect */
         function saveAndRedirect() {
             const firstName = document.querySelector("input[name='firstName']").value;
             const age = document.querySelector("input[name='age']").value;
+            const gender = document.querySelector("input[name='gender']").value;
             localStorage.setItem("firstName", firstName);
             localStorage.setItem("age", age);
+            localStorage.setItem("gender", gender);
             window.location.href = "sync.html";
         }
     </script>

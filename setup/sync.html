@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AidLink</title>
-    <link rel="stylesheet" href="../styles.css">
+    <title>User Info Form</title>
+    <link rel="stylesheet" href="forms.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
-
 <body>
+    <!--Back Button-->
     <div class="back-button">
         <button type="button" onclick="window.location.href='user.html'">
             ← Back
         </button>
     </div>
-    <section style="margin-top: 6vh;" class="info-section">
 
+    <!--Page Content-->
+    <section class="info-section">
         <div class="info-left">
             <p id="welcome"></p>
             <h2>Tell Us About Yourself</h2>
@@ -26,6 +26,7 @@
             </p>
         </div>
 
+        <!--Info Form-->
         <div class="info-right">
             <form class="info-form">
                 <div class="form-group">
@@ -66,6 +67,7 @@
 
     </section>
     <script>
+        /* User Welcome Message */
         document.getElementById("welcome").innerText = "Welcome, " + localStorage.getItem("firstName") + "!";
     </script>
 
