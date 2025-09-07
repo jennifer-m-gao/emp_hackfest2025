@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap');
 
+/* General Styling */
 * {
     box-sizing: border-box;
     max-width: 100%;
     overflow-x: hidden;
 }
-
 
 
 :root {
@@ -75,7 +75,6 @@ h2 {
     transition: all 0.3s ease;
 }
 
-/*X */
 .hamburger.active span:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
 }
@@ -185,7 +184,7 @@ h2 {
 }
 
 
-/*back*/
+/* Back Button */
 .back-button {
     position: fixed;
     top: 12vh;
@@ -217,7 +216,6 @@ h2 {
 }
 
 
-
 /*User Info Form*/
 .info-section {
     display: flex;
@@ -240,7 +238,6 @@ h2 {
 
 .info-left h2 {
     font-family: 'Playfair Display', sans-serif;
-    /*font-size: 3rem;*/
     margin: 0 0 1rem 0;
     line-height: 1.2;
 }
@@ -332,10 +329,10 @@ h2 {
 }
 
 
-/*dif sidebar*/
+/* Sidebar Styling */
 .layout {
   display: flex;
-  height: 100vh; /* full height */
+  height: 100vh;
 }
 .sidebar-left {
     width: 250px;
@@ -388,19 +385,6 @@ h2 {
 .sidebar-left .help-btn:hover {
     background-color: #c49f25;
 }
-
-.page-content {
-    padding-top: 60px; 
-    padding-left: 250px; 
-    padding-right: 1rem;
-}
-
-
-
-#map {
-  flex: 1; /* take up remaining space */
-}
-
 
 .slider {
   -webkit-appearance: none;
