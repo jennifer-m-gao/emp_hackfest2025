@@ -32,16 +32,18 @@
     </div>
     <div>
         <h1>How many people are with you</h1>
-
+        <div class = "slide-container">
+            <input type = "range" min="1" max = "20" id="people">
+            <p id = 'numP'>10</p>
+        </div>
     </div>
-    <div>
+    <div class = 'injure'>
         <h1>Do you have injuries</h1>
         <div id = 'injuries'>
-            <div class = 'multi-choice' class = 'bool'>
-                <p>Yes</p>
-            </div>
-            <div class = 'multi-choice' class = 'bool'>
-                <p>No</p>
+            <label class="toggle-switch">
+                <input type="checkbox" id="myToggle">
+                <span class="slider2"></span>
+            </label>
             </div>
         </div>
     </div>
