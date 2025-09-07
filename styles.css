@@ -451,7 +451,7 @@ input[type="range"]::-webkit-slider-thumb {
 .multi-choice:hover {
   background-color: #f0f0f0;
 }
-
+/* the class that is added to multi-choice element's classlist if element is selected, turning it gray */
 .multi-choice.selected {
   background-color: rgb(83, 83, 83);
 }
