@@ -335,7 +335,7 @@ h2 {
 /*dif sidebar*/
 .layout {
   display: flex;
-  height: 100vh; /* full height */
+  height: 100vh; 
 }
 .sidebar-left {
     width: 250px;
@@ -398,7 +398,7 @@ h2 {
 
 
 #map {
-  flex: 1; /* take up remaining space */
+  flex: 1; 
 }
 
 
@@ -545,7 +545,7 @@ h1{
   justify-content: space-evenly;
 }
 
-/* Sidebar */
+/*sidebar */
 .sidebar {
     position: fixed;
     top: 0;
