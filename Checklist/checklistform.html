@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AidLink</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+    <div class="back-button">
+        <button type="button" onclick="window.location.href='../userDashboard.html'">
+            ← Back
+        </button>
+    </div>
+    <section style="margin-top: 6vh;" class="info-section">
+
+        <div class="info-left">
+            <h2>Tell Us About Yourself</h2>
+            <p class="animate-contact-p">
+                To correctly build your survival checklist, we need some information about you and your family. This information will never be shared with third-party organizations.
+            </p>
+        </div>
+
+        <div class="info-right">
+            <form class="info-form">
+                <div class="form-group">
+                    <label for="members">Family Members</label>
+                    <input type="number" name="members" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="pets">Pets</label>
+                    <input type="number" name="pets" required>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="Medical History">Health Conditions</label>
+                    <textarea name="message" rows="5" required></textarea>
+                </div>
+
+
+                <div class="form-submit">
+                    <button type="button" onclick="window.location.href='checklist.html'">Submit</button>
+                </div>
+            </form>
+        </div>
+
+
+
+    </section>
+
+
+</body>
+
+</html>
