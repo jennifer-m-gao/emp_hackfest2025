@@ -30,7 +30,7 @@ slider.addEventListener('change', () => {
       color = "red";
     }
     slider.style.setProperty("--thumb-color", color);
-    person['name'] = 'Bob';
+    person['name'] = JSON.parse(localStorage.getItem('firstName')) || 'User';
     person['danger-level'] = value;
     testperson.textContent = "Current Entry: " + JSON.stringify(person);
   }
@@ -86,7 +86,7 @@ people.addEventListener('change', (e) => {
   testperson.textContent = "Current Entry: " + JSON.stringify(person);
 })
 submit.addEventListener('click', (e) => {
-  if (person['name'] == null) { person['name'] = 'John'; }
+  if (person['name'] == null) { person['name'] = JSON.parse(localStorage.getItem('firstName')) || 'User'; }
   if (person['danger-level'] == null) { person['danger-level'] = "0"; }
   if (person['amenities'] == null) { person['amenities'] = []; }
   if (person['injury'] == null) { person['injury'] = 'no'; }
