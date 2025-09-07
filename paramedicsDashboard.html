@@ -366,8 +366,8 @@
           <p><strong>Heart rate:</strong> ${Math.round(person.heartRate)} bpm</p>
           <p><strong>Body Temperature:</strong> ${Math.round(person.bodyTemp)} °F</p>
           <p class="status ${person.status.name}"><strong>Status:</strong> ${person.status.name}</p>
-          <p><strong>Amenities:</strong> ${person.amenities}</p>
-          <p><strong>People:</strong> ${person.numpeople}</p>
+          <p><strong>Needs:</strong> ${person.amenities}</p>
+          <p><strong>People With Them:</strong> ${person.numpeople}</p>
         </div>
       `; 
     }
@@ -378,9 +378,9 @@
 
     const submissions = JSON.parse(localStorage.getItem('submissions')) || [];
     function simulateSubmission(sub){
-      const name =  JSON.parse(localStorage.getItem('firstName')) || 'User';
-      const lat = 47.60 + (Math.random()-0.5)*0.1;
-      const long = -122.33 + (Math.random()-0.5)*0.1;
+      const name = localStorage.getItem('firstName') || 'User';
+      const lat = 47.688777;
+      const long = -122.150111;
       const gender = Math.random()>0.5?"male":"female";
       const p = new Person(
         name,
