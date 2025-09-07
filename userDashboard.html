@@ -107,21 +107,35 @@
   .popup-content p {
     margin: 4px 0;
   }
+
+  .alert {
+      position:fixed;
+      border-color: rgb(201, 38, 38);
+      color: rgb(201, 38, 38);
+      border-width: 3px;
+      width: 40vw;
+      height: 7vh;
+      margin-top: 1.5vh;
+      font-size: 125%;
+      left: 35%;
+      z-index: 1000;
+  }
   </style>
 </head>
 
 <body>
+  <button class="alert">ALERT! 5.0 magnitude earthquake reported in your region!</button>
   <div class="layout">
 
     <div class="sidebar-left">
       <div class="sidebar-logo">
-        <img src="..\logo.png" alt="Logo">
+        <img src="media/logo.png" alt="Logo">
       </div>
       <ul>
-        <li><a href="../userDashboard.html">Dashboard</a></li>
-        <li><a href="../Checklist\checklist.html">Pre-Disaster Checklist</a></li>
-        <li><a href="../userDashboard.html">Profile</a></li>
-        <li><a href="../I-need-help\index.html" class="help-btn">Get Help</a></li>
+        <li><a href="userDashboard.html">Dashboard</a></li>
+        <li><a href="../Checklist/checklist.html">Pre-Disaster Checklist</a></li>
+        <li><a href="userDashboard.html">Profile</a></li>
+        <li><a href="../I-need-help/index.html" class="help-btn">Get Help</a></li>
       </ul>
     </div>
 
