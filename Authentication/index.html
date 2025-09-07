@@ -10,19 +10,6 @@
 </head>
 
 <body>
-
-    <!--navbar-->
-    <!-- Left Sidebar -->
-    <!--<div class="sidebar-left">
-        <ul>
-            <li><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="checklist.html">Pre-Disaster Checklist</a></li>
-            <li><a href="profile.html">Profile</a></li>
-            <li><a href="help.html" class="help-btn">Get Help</a></li>
-        </ul>
-    </div>-->
-
-
     <nav class="navbar">
         <div class="nav-left">
             <img src="..\logo.png" alt="Logo" class="logo">
@@ -45,23 +32,23 @@
         </ul>
     </div>
 
+        <!-- Action Buttons -->
+        <div class="action-section">
+            <div class="action-buttons">
+                <a href="user.html" class="action-btn primary">
+                    <i class="fas fa-user"></i>
+                    I'm a Civilian
+                </a>
 
-    <!--Icons that will be redirected-->
-    <section class="components-section">
-        <div class="components-grid">
-            <a href="user.html" class="component-tile">
-                <div class="component-icon"><i class="fas fa-user"></i></div>
-                <h3>I'm a User</h3>
-            </a>
-
-            <a href="paramedic.html" class="component-tile">
-                <div class="component-icon"><i class="fas fa-briefcase-medical"></i></div>
-                <h3>I'm a Paramedic</h3>
-            </a>
+                <a href="paramedic.html" class="action-btn secondary">
+                    <i class="fas fa-briefcase-medical"></i>
+                    I'm a First Responder
+                </a>
+            </div>
         </div>
-    </section>
+    </div>
 
-    <script>
+<script>
         const hamburger = document.getElementById('hamburger');
         const sidebar = document.getElementById('sidebar');
 
