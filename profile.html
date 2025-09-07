@@ -21,11 +21,13 @@
         .info-list{
             text-align: left;
             padding-left: 35%;
+            
         }
 
     </style>
 
     <body>
+        <!--page navigation bar and logo-->
         <nav class="navbar">
             <div class="nav-left">
                 <img src="media/logo.png" alt="Logo" class="logo">
@@ -40,6 +42,7 @@
             </div>
         </nav>
 
+        <!--collapsable sidebar bar-->
         <div class="sidebar" id="sidebar">
             <ul>
                 <li><a href="dashboard.html">Dashboard</a></li>
@@ -50,11 +53,13 @@
         </div>
 
         <div style="padding-top: 100px; text-align: center;">
-
+            <!--profile icon-->
             <img src="media/profile-icon.png" width="150px" class="profile">
 
+            <!--display name and other profile info-->
             <h2 id="display-name">Name</h2>  
 
+            <!--display for age, gender, height, weight, etc.-->
             <div class="info-list">
                 <ul>
                     <li class="info-item" id="age-info">Age:</li>
@@ -68,6 +73,7 @@
         </div>
 
         <script>
+            //script for navbar
             const hamburger = document.getElementById('hamburger');
             const sidebar = document.getElementById('sidebar');
     
@@ -76,6 +82,7 @@
                 sidebar.classList.toggle('open');
             });
 
+            //changes profile info to current user
             const firstName = localStorage.getItem('firstName') || "User";
             const age = localStorage.getItem('age') || "-";
             const gender = localStorage.getItem('gender') || "-";
