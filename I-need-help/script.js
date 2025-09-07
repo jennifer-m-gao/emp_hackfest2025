@@ -26,11 +26,13 @@ window.addEventListener('DOMContentLoaded', () => {
         element.addEventListener('click', () => {
             element.classList.toggle('selected');
             amenities = Array.from(ams)
-            .map(el => el.querySelector('p').textContent);
+                .filter(el => el.classList.contains('selected'))  // ✅ only keep selected ones
+                .map(el => el.querySelector('p').textContent);
             person['amenities'] = [...amenities];
             
         });
     });
+
 
     toggle.addEventListener('change', (e) => {
         person['injury'] = e.target.checked ? "yes" : "no";

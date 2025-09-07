@@ -168,6 +168,9 @@
         <li><a href="../Checklist/checklistform.html">Pre-Disaster Checklist</a></li>
         <li><a href="profile.html">Profile</a></li>
         <li><a href="../I-need-help/index.html" class="help-btn">Get Help</a></li>
+        <button onclick="localStorage.clear(); alert('Local storage cleared!');">
+          Clear Storage
+        </button>
         <div class="back-button">
             <button type="button" onclick="window.location.href='index.html'">
                 ← Logout
@@ -368,9 +371,28 @@
       popupAnchor: [1, -34],
       shadowSize: [41, 41]
     });
+
+    const submissions = JSON.parse(localStorage.getItem('submissions')) || [];
+    let amenities = 'None';
+    let numPeople = 0;
+    submissions.forEach(sub => {
+      amenities = (sub.amenities && sub.amenities.length > 0) 
+        ? sub.amenities.join(", ") 
+        : 'None';
+      numPeople = parseInt(sub['num-people']);
+    });
+
+    const age = localStorage.getItem('age');
+    const gender = localStorage.getItem('gender');
     L.marker([47.688777, -122.150111], { icon: imageIcon })
       .addTo(map)
-      .bindPopup(`<b> ${yourName} <br /> Current Location</b><br/>`);
+      .bindPopup(`<div class="popup-content">
+          <p><strong>Name:</strong> ${yourName}</p>
+          <p><strong>Age:</strong> ${age}</p>
+          <p><strong>Gender:</strong> ${gender}</p>
+          <p><strong>Needs:</strong> ${amenities}</p>
+          <p><strong>People With Them:</strong> ${numPeople}</p>
+        </div>`);
 
     proj4.defs("EPSG:2285", "+proj=lcc +lat_1=48.73333333333333 +lat_2=47.5 +lat_0=47 +lon_0=-120.8333333333333 +x_0=500000.0000000001 +y_0=0 +datum=NAD83 +units=us-ft +no_defs +type=crs");
     
