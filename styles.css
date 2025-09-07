@@ -344,18 +344,26 @@ h2 {
 
 
 /*dif sidebar*/
-/* Left Sidebar */
+.layout {
+  display: flex;
+  height: 100vh; /* full height */
+}
 .sidebar-left {
-    position: fixed;
-    top: 60px; /* below navbar */
-    left: 0;
     width: 250px;
-    height: calc(100% - 60px);
     background-color: var(--dark-green);
-    padding-top: 1rem;
-    z-index: 998;
+    color: var(--white);
+    min-height: calc(100vh - 0px); 
     display: flex;
     flex-direction: column;
+    padding-top: 1rem;
+}
+
+.sidebar-logo {
+    text-align: center;
+}
+.sidebar-logo img {
+    max-width: 150px;
+    height: auto;
 }
 
 .sidebar-left ul {
@@ -381,7 +389,6 @@ h2 {
     border-radius: 4px;
 }
 
-/* Help button inside left sidebar */
 .sidebar-left .help-btn {
     background-color: var(--white);
     color: var(--dark-green) !important;
@@ -393,9 +400,14 @@ h2 {
     background-color: #c49f25;
 }
 
-/* Push page content so it doesn't overlap with left sidebar */
 .page-content {
-    padding-top: 60px; /* navbar height */
-    padding-left: 250px; /* left sidebar width */
+    padding-top: 60px; 
+    padding-left: 250px; 
     padding-right: 1rem;
+}
+
+
+
+#map {
+  flex: 1; /* take up remaining space */
 }
