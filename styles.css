@@ -411,21 +411,17 @@ h2 {
   outline: none;
   margin-left: 40px;
   }
-input[type = 'range']::-webkit-slider-thumb {
+input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background-color: var(--thumb-color, #464444);
-  accent-color: var(--thumb-color, #464444);
-  }
-input[type="range"]::-webkit-range-thumb {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--thumb-color, #000);
+  background: var(--thumb-color, #464444);
   cursor: pointer;
-  }
+  border: none;
+}
+
+
 .multi-choice {
   padding: 6px 12px;
   margin: 3px;
@@ -444,8 +440,7 @@ input[type="range"]::-webkit-range-thumb {
 }
 
 .multi-choice.selected {
-  background-color: var(--dark-green);
-  color: white;
+  background-color: rgb(83, 83, 83);
 }
 
 #am-options {
