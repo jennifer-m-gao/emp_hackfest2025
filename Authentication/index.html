@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AidLink</title>
-    <link rel="stylesheet" href="..\styles.css">
+    <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 
 <body>
     <nav class="navbar">
         <div class="nav-left">
-            <img src="..\logo.png" alt="Logo" class="logo">
+            <img src="../logo.png" alt="Logo" class="logo">
         </div>
         <div class="nav-right">
             <div class="hamburger" id="hamburger">
@@ -23,16 +23,12 @@
         </div>
     </nav>
 
-    <div class="sidebar" id="sidebar">
-        <ul>
-            <li><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="checklist.html">Pre-Disaster Checklist</a></li>
-            <li><a href="profile.html">Profile</a></li>
-            <li><a href="help.html" class="help-btn">Get Help</a></li>
-        </ul>
-    </div>
+    <div class="landing-container">
+        <div class="hero-section">
+            <h1 class="hero-title">AidLink</h1>
+            <p class="hero-subtitle">Connecting rescuers and those in need during natural disasters</p>
+        </div>
 
-        <!-- Action Buttons -->
         <div class="action-section">
             <div class="action-buttons">
                 <a href="user.html" class="action-btn primary">
@@ -47,17 +43,5 @@
             </div>
         </div>
     </div>
-
-<script>
-        const hamburger = document.getElementById('hamburger');
-        const sidebar = document.getElementById('sidebar');
-
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            sidebar.classList.toggle('open');
-        });
-    </script>
-
 </body>
-
 </html>
