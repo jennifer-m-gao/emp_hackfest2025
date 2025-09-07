@@ -4,81 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AidLink</title>
-    <link href = '../styles.css' rel = 'stylesheet'>
+    <link href="../styles.css" rel="stylesheet">
 </head>
 <body>
 
-        <nav class="navbar">
-        <div class="nav-left">
-            <img src="../media/logo.png" alt="Logo" class="logo">
+<nav class="navbar">
+    <div class="nav-left">
+        <img src="../media/logo.png" alt="Logo" class="logo">
+    </div>
+    <div class="nav-right">
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
-        <div class="nav-right">
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
+    </div>
+</nav>
 
-    <div class="sidebar" id="sidebar">
-        <ul>
-            <li><a href="../paramedicsDashboard.html">Dashboard</a></li>
-            <li><a href="../Checklist\checklist.html">Pre-Disaster Checklist</a></li>
-            <li><a href="../userDashboard.html">Profile</a></li>
-            <li><a href="../I-need-help\index.html" class="help-btn">Get Help</a></li>
-        </ul>
-    </div>
+<div class="sidebar" id="sidebar">
+    <ul>
+        <li><a href="../paramedicsDashboard.html">Dashboard</a></li>
+        <li><a href="../Checklist/checklist.html">Pre-Disaster Checklist</a></li>
+        <li><a href="../userDashboard.html">Profile</a></li>
+        <li><a href="../I-need-help/index.html" class="help-btn">Get Help</a></li>
+    </ul>
+</div>
 
-    <div>
-        <h1>Choose your level of danger</h1>
-        <div class="slidecontainer">
-            <input type="range" min="0" max="5" value="0" class="slider" id="myRange">
-        </div>
+<div>
+    <h1 id="dangerous">Choose your level of danger</h1>
+    <div class="slidecontainer">
+        <input type="range" min="0" max="5" value="0" class="slider" id="myRange">
     </div>
-    <div id = 'amenities'>
-        <h1>Select which amenities you need</h1> 
-        <div id = 'am-options'>
-            <div class = 'multi-choice' >
-                <p>Water</p>
-            </div>
-            <div class = 'multi-choice'>
-                <p>Communication</p>
-            </div>
-            <div class = 'multi-choice'>
-                <p>Food</p>
-            </div>
-            <div class = 'multi-choice'>
-                <p>First Aid</p>
-            </div>
-        </div>
-    </div>
-    <div>
-        <h1>How many people are with you</h1>
-        <div class = "slide-container">
-            <input type = "range" min="1" max = "20" id="people">
-            <p id = 'numP'>10</p>
-        </div>
-    </div>
-    <div class = 'injure'>
-        <h1>Do you have injuries</h1>
-        <div id = 'injuries'>
-            <label class="toggle-switch">
-                <input type="checkbox" id="myToggle">
-                <span class="slider2"></span>
-            </label>
-            </div>
-        </div>
-    </div>
-    <div id = 'test-database'> 
-        <p id = 'tester'></p>
-    </div>
-    <div id = 'test'>
-        <p id = 'test-person'></p>
-    </div>
+</div>
 
+<div id="amenities">
+    <h1>Select which amenities you need</h1>
+    <div id="am-options">
+        <div class="multi-choice"><p>Water</p></div>
+        <div class="multi-choice"><p>Communication</p></div>
+        <div class="multi-choice"><p>Food</p></div>
+        <div class="multi-choice"><p>First Aid</p></div>
     </div>
-    <button type = 'button'>Submit</button>
+</div>
+
+<div>
+    <h1>How many people are with you</h1>
+    <div class="slide-container">
+        <input type="range" min="1" max="20" id="people">
+        <p id="numP">10</p>
+    </div>
+</div>
+
+<div class="injure">
+    <h1>Do you have injuries</h1>
+    <div id="injuries">
+        <label class="toggle-switch">
+            <input type="checkbox" id="myToggle">
+            <span class="slider2"></span>
+        </label>
+    </div> <!-- properly close #injuries -->
+</div> <!-- properly close .injure -->
+
+<div id="test-database">
+    <p id="tester"></p>
+</div>
+
+<div id="test">
+    <p id="test-person"></p>
+</div>
+
+<button type="button" id="submit">Submit</button>
+
+<script src="script.js"></script>
 </body>
-<script src = 'script.js'></script>
 </html>
