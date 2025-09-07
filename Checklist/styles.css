@@ -1,0 +1,42 @@
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow: none;
+    background-color: var(--white);
+    color: var(--black);
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    line-height: 1.5;
+    scroll-behavior: smooth;
+    scroll-padding-top: 13vh;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    font-family: 'Playfair Display', sans-serif;
+    font-size: clamp(3rem, 5vw, 7rem);
+    margin: 0;
+    font-weight: 500;
+}
+
+p {
+    text-align: center;
+}
+
+.strikethrough:checked + label{
+    text-decoration: line-through;
+}
+
+.disaster-button{
+    width: 30%;
+
+}
+
+.subtext {
+    font-size: small;
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href = 'styles.css' rel = 'stylesheet'>
+</head>
+<body>
+    <div>
+        <h1>Choose your level of danger</h1>
+        <div class="slidecontainer">
+            <input type="range" min="0" max="5" value="0" class="slider" id="myRange">
+        </div>
+    </div>
+    <div id = 'amenities'>
+        <h1>Select which amenities you need</h1> 
+        <div id = 'am-options'>
+            <div class = 'multi-choice' >
+                <p>Water</p>
+            </div>
+            <div class = 'multi-choice'>
+                <p>Communication</p>
+            </div>
+            <div class = 'multi-choice'>
+                <p>Food</p>
+            </div>
+            <div class = 'multi-choice'>
+                <p>First Aid</p>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h1>How many people are with you</h1>
+
+    </div>
+    <div>
+        <h1>Do you have injuries</h1>
+        <div id = 'injuries'>
+            <div class = 'multi-choice' class = 'bool'>
+                <p>Yes</p>
+            </div>
+            <div class = 'multi-choice' class = 'bool'>
+                <p>No</p>
+            </div>
+        </div>
+    </div>
+    <div id = 'test-database'> 
+        <p id = 'tester'></p>
+    </div>
+    <div id = 'test'>
+        <p id = 'test-person'></p>
+    </div>
+
+    </div>
+    <button type = 'button'>Submit</button>
+</body>
+<script src = 'script.js'></script>
+</html>
