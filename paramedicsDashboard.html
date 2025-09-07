@@ -410,7 +410,7 @@
     });
 
     setInterval(()=>{
-      const stored = JSON.parse(sessionStorage.getItem('submissions')) || [];
+      const stored = JSON.parse(localStorage.getItem('submissions')) || [];
       stored.forEach(sub=>{
         if(!sub._added){
           const p = simulateSubmission(sub);
@@ -421,7 +421,7 @@
           sub._added = true;
         }
       });
-      sessionStorage.setItem('submissions',JSON.stringify(stored));
+      localStorage.setItem('submissions',JSON.stringify(stored));
       
 
       people.forEach((p,i)=>{

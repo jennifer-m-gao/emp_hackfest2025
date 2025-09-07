@@ -1,7 +1,7 @@
 const slider = document.getElementById("myRange");
 const people = document.getElementById('people');
 const nump = document.getElementById('numP');
-var submissions = JSON.parse(sessionStorage.getItem('submissions')) || [];
+var submissions = JSON.parse(localStorage.getItem('submissions')) || [];
 let person = {};
 let amenities = [];
 let injury = "";
@@ -92,7 +92,7 @@ submit.addEventListener('click', (e) => {
   if (person['injury'] == null) { person['injury'] = 'no'; }
   if (person['num-people'] == null) { person['num-people'] = '10'; }
   submissions.push({ ...person });
-  sessionStorage.setItem('submissions', JSON.stringify(submissions));
+  localStorage.setItem('submissions', JSON.stringify(submissions));
   testdatabase.textContent = "Current Submissions: " + JSON.stringify(submissions);
   person = {};
   testperson.textContent = "Current Entry: " + JSON.stringify(person);
