@@ -8,57 +8,16 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   <link rel="stylesheet" href="..\styles.css">
-
   <style>
-    html,
-    body {
-      height: 100%;
-      margin: 0;
-    }
-
-    #map {
-      height: 100%;
-      width: 100%;
-    }
-
-    .leaflet-popup-content-wrapper {
-      background: #1e293b;
-      color: #f1f5f9;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    }
-
-    .leaflet-popup-tip {
-      background: #1e293b;
-    }
-
-
-    .leaflet-popup-content {
-      font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-    }
-
-    .popup-content {
-      font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-    }
-
-    .popup-content p {
-      margin: 4px 0;
-    }
-
-    .status.stable {
-      color: #22c55e;
-      font-weight: bold;
-    }
-
-    .status.serious {
-      color: #eab308;
-      font-weight: bold;
-    }
-
-    .status.critical {
-      color: #ef4444;
-      font-weight: bold;
-    }
+    html, body { height: 100%; margin: 0; }
+    #map { height: 100%; width: 100%; }
+    .leaflet-popup-content-wrapper { background: #1e293b; color: #f1f5f9; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
+    .leaflet-popup-tip { background: #1e293b; }
+    .leaflet-popup-content { font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+    .popup-content p { margin: 4px 0; }
+    .status.stable { color: #22c55e; font-weight: bold; }
+    .status.serious { color: #eab308; font-weight: bold; }
+    .status.critical { color: #ef4444; font-weight: bold; }
   </style>
 </head>
 
@@ -78,197 +37,61 @@
 
     <div id="map"></div>
   </div>
-  <div id="peopleContainer"></div>
+
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script>
-    const map = L.map('map', {
-      zoomControl: true,
-      dragging: true,
-    }).setView([47.6062, -122.3321], 9);
-
+    // -------- Map Setup --------
+    const map = L.map('map', { zoomControl: true, dragging: true }).setView([47.6062, -122.3321], 9);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    const areas = [
-      {
-        name: 'earthquake',
-        color: '#ef4444',
-        coords: [
-          [47.863252, -123.254382],
-          [47.863252, -121.875549],
-          [47.010633, -121.875549],
-          [47.010633, -123.254382]
-        ]
-      }
-    ];
+    const areas = [{ name: 'earthquake', color: '#ef4444', coords: [[47.863252,-123.254382],[47.863252,-121.875549],[47.010633,-121.875549],[47.010633,-123.254382]] }];
+    areas.forEach(a => L.polygon(a.coords, { color: a.color, weight: 2, fillColor: a.color, fillOpacity: 0.25 }).addTo(map));
 
-    areas.forEach(a => {
-      const poly = L.polygon(a.coords, {
-        color: a.color,
-        weight: 2,
-        fillColor: a.color,
-        fillOpacity: 0.25
-      }).addTo(map);
-
-      //poly.bindPopup(`<strong>${a.name}</strong>`);
-
-    });
-
-
-    var greenIcon = new L.icon({
-      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
-      shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41]
-    });
-
-    var redIcon = new L.icon({
-      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
-      shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41]
-    });
-
-    var yellowIcon = new L.icon({
-      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png',
-      shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41]
-    });
+    // -------- Icons & Statuses --------
+    const greenIcon = new L.icon({ iconUrl:'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png', shadowUrl:'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png', iconSize:[25,41], iconAnchor:[12,41], popupAnchor:[1,-34], shadowSize:[41,41] });
+    const yellowIcon = new L.icon({ iconUrl:'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png', shadowUrl:'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png', iconSize:[25,41], iconAnchor:[12,41], popupAnchor:[1,-34], shadowSize:[41,41] });
+    const redIcon = new L.icon({ iconUrl:'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png', shadowUrl:'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png', iconSize:[25,41], iconAnchor:[12,41], popupAnchor:[1,-34], shadowSize:[41,41] });
 
     const statuses = [
-      { name: "stable", minHR: 60, maxHR: 100, probability: 0.6, minTemp: 97, maxTemp: 100, icon: greenIcon },
-      { name: "serious", minHR: 40, maxHR: 60, probability: 0.3, minTemp: 95, maxTemp: 96.99, icon: yellowIcon },
-      { name: "critical", minHR: 0, maxHR: 40, probability: 0.1, minTemp: 90, maxTemp: 95, icon: redIcon }
+      { name: "stable", minHR: 60, maxHR: 100, icon: greenIcon },
+      { name: "serious", minHR: 40, maxHR: 60, icon: yellowIcon },
+      { name: "critical", minHR: 0, maxHR: 40, icon: redIcon }
     ];
 
     function pickStatus() {
-      const randomNum = Math.floor(Math.random() * 10) + 1;
-      if (randomNum <= 7) {
-        return statuses[0];
-      } else if (randomNum <= 9) {
-        return statuses[1];
-      } else {
-        return statuses[2];
-      }
+      const n = Math.floor(Math.random()*10)+1;
+      return n<=7 ? statuses[0] : (n<=9 ? statuses[1] : statuses[2]);
     }
 
-    function Person(age, gender, X, Y) {
-      this.age = age;
-      this.gender = gender;
-      this.X = X;
-      this.Y = Y;
+    // -------- Person & Update Logic --------
+    function Person(age, gender, X, Y, amenities, people) {
+      this.age = age; this.gender = gender; this.X = X; this.Y = Y;
       this.status = pickStatus();
-      this.heartRate = Math.random() * (this.status.maxHR - this.status.minHR) + this.status.minHR;
-      this.bodyTemp = Math.random() * (this.status.maxTemp - this.status.minTemp) + this.status.minTemp;
+      this.heartRate = Math.random()*(this.status.maxHR-this.status.minHR)+this.status.minHR;
+      this.bodyTemp = Math.random()*(97-95)+95;
+      this.amenities = amenities;
+      this.people = people;
     }
 
-    function updatePerson(person) {
-      let change;
-      switch (person.status.name) {
-        case "stable":
-          change = Math.random() * 1;
-          break;
-        case "serious":
-          change = Math.random() * 2;
-          break;
-        case "critical":
-          change = Math.random() * 4;
-          break;
-      }
+    function updatePerson(person){
+      let change = person.status.name==="stable"?Math.random()*1:person.status.name==="serious"?Math.random()*2:Math.random()*4;
+      person.heartRate += Math.random()>0.5 ? change : -change;
+      person.heartRate = Math.min(Math.max(person.heartRate,20),200);
+      person.status = person.heartRate>60?statuses[0]:person.heartRate>40?statuses[1]:statuses[2];
 
-      if (Math.random() > 0.5) {
-        change -= change;
-      } else {
-        person.heartRate += change;
-      }
-
-      // Clamp heartRate to realistic range (20–200 bpm)
-      if (person.heartRate < 20) person.heartRate = 20;
-      if (person.heartRate > 200) person.heartRate = 200;
-
-      if (person.heartRate > 60) {
-        person.status = statuses[0];
-      } else if (person.heartRate > 40) {
-        person.status = statuses[1];
-      } else {
-        person.status = statuses[2];
-      }
-
-      let chance = Math.random();
-      switch (person.status.name) {
-        case "stable":
-          if (chance > 0.5) {
-            person.bodyTemp += Math.random() * 2;
-          } else {
-            person.bodyTemp -= Math.random() * 2;
-          }
-          break;
-        case "serious":
-          if (chance > 0.5) {
-            person.bodyTemp += Math.random() * 3;
-          } else {
-            person.bodyTemp -= Math.random() * 3;
-          }
-          break;
-        case "critical":
-          if (chance > 0.5) {
-            person.bodyTemp += Math.random() * 4;
-          } else {
-            person.bodyTemp -= Math.random() * 4;
-          }
-          break;
-      }
-
-      // Clamp bodyTemp to realistic human range (80–110 °F)
-      if (person.bodyTemp < 80) person.bodyTemp = 80;
-      if (person.bodyTemp > 110) person.bodyTemp = 110;
-
-      if (person.bodyTemp < 95) {
-        person.status = statuses[2];
-      } else if (person.bodyTemp < 97) {
-        person.status = statuses[1];
-      } else {
-        person.status = statuses[0];
-      }
+      let tempChange = person.status.name==="stable"?2:person.status.name==="serious"?3:4;
+      person.bodyTemp += Math.random()>0.5?tempChange:-tempChange;
+      if(person.bodyTemp<95) person.status=statuses[2];
+      else if(person.bodyTemp<97) person.status=statuses[1];
+      else person.status=statuses[0];
+      person.bodyTemp = Math.min(Math.max(person.bodyTemp,80),110);
     }
 
-
-    const people = [];
-    const markers = [];
-
-    people.push(new Person(32, "female", 47.6097, -122.3331));
-    people.push(new Person(45, "male", 47.6205, -122.3493));
-    people.push(new Person(27, "female", 47.6550, -122.3080));
-    people.push(new Person(53, "male", 47.5301, -122.0326));
-    people.push(new Person(19, "female", 47.7557, -122.3415));
-    people.push(new Person(68, "male", 47.3073, -122.2285));
-    people.push(new Person(8, "female", 47.4874, -122.2171));
-    people.push(new Person(39, "male", 47.6786, -122.1316));
-    people.push(new Person(24, "female", 47.6104, -122.2007));
-    people.push(new Person(60, "male", 47.4490, -122.3088));
-    people.push(new Person(72, "female", 47.5407, -122.3877));
-    people.push(new Person(34, "male", 47.6156, -122.2119));
-    people.push(new Person(51, "female", 47.4047, -122.3243));
-    people.push(new Person(12, "male", 47.6790, -122.3870));
-    people.push(new Person(83, "female", 47.7430, -122.1731));
-    people.push(new Person(28, "female", 47.6782, -122.1760));
-    people.push(new Person(36, "male", 47.7557, -122.3076));
-    people.push(new Person(47, "female", 47.7089, -122.2030));
-    people.push(new Person(22, "male", 47.6739, -122.1215));
-    people.push(new Person(55, "female", 47.8209, -122.3151));
-
-
-    function getPopupContent(person) {
+    function getPopupContent(person){
       return `
         <div class="popup-content">
           <p><strong>Age:</strong> ${person.age}</p>
@@ -276,41 +99,73 @@
           <p><strong>Heart rate:</strong> ${Math.round(person.heartRate)} bpm</p>
           <p><strong>Body Temperature:</strong> ${Math.round(person.bodyTemp)} °F</p>
           <p class="status ${person.status.name}"><strong>Status:</strong> ${person.status.name}</p>
+          <p><strong>Amenities:</strong> ${person.amenities}</p>
+          <p><strong>People:</strong> ${person.people}</p>
         </div>
       `;
     }
 
-    people.forEach(person => {
+    const people = [];
+    const markers = [];
+
+    people.push(new Person(32,"female",47.6097,-122.3331,"food, water, communication",2));
+    people.push(new Person(45,"male",47.6205,-122.3493,"first aid",7));
+
+    const submissions = JSON.parse(localStorage.getItem('submissions')) || [];
+    function simulateSubmission(sub){
+      const lat = 47.60 + (Math.random()-0.5)*0.1;
+      const long = -122.33 + (Math.random()-0.5)*0.1;
+      const gender = Math.random()>0.5?"male":"female";
+      const p = new Person(
+        Math.floor(Math.random()*61)+10,
+        gender,
+        lat,long,
+        sub.amenities?sub.amenities.join(","):'',
+        parseInt(sub['num-people'])||1
+      );
+      const danger = parseInt(sub['danger-level']);
+      if(danger<=2) p.status=statuses[0];
+      else if(danger==3) p.status=statuses[1];
+      else p.status=statuses[2];
+      if(sub['injury']=='yes'){p.heartRate*=0.9;p.bodyTemp-=1;}
+      return p;
+    }
+
+    submissions.forEach(sub => {
+      const p = simulateSubmission(sub);
+      people.push(p);
+    });
+
+    people.forEach(person=>{
       const marker = L.marker([person.X, person.Y], { icon: person.status.icon }).addTo(map);
       marker.bindPopup(getPopupContent(person));
       markers.push(marker);
     });
 
-    setInterval(() => {
-      people.forEach((person, i) => {
-        updatePerson(person);
-
-        markers[i].setIcon(person.status.icon);
-        const popup = markers[i].getPopup();
-        popup.setContent(getPopupContent(person));
-
-        if (popup.isOpen()) {
-          popup.update();
+    setInterval(()=>{
+      const stored = JSON.parse(localStorage.getItem('submissions')) || [];
+      stored.forEach(sub=>{
+        if(!sub._added){
+          const p = simulateSubmission(sub);
+          people.push(p);
+          const m = L.marker([p.X,p.Y],{icon:p.status.icon}).addTo(map);
+          m.bindPopup(getPopupContent(p));
+          markers.push(m);
+          sub._added = true;
         }
       });
-    }, 1500);
+      localStorage.setItem('submissions',JSON.stringify(stored));
 
+      people.forEach((p,i)=>{
+        updatePerson(p);
+        markers[i].setIcon(p.status.icon);
+        const popup = markers[i].getPopup();
+        popup.setContent(getPopupContent(p));
+        if(popup.isOpen()) popup.update();
+      });
+    },1500);
 
-    function onMapClick(e) {
-      L.popup()
-        .setLatLng(e.latlng)
-        .setContent("You clicked the map at " + e.latlng.toString())
-        .openOn(map);
-    }
-
-    map.on('click', onMapClick);
+    map.on('click', e => L.popup().setLatLng(e.latlng).setContent("You clicked the map at "+e.latlng.toString()).openOn(map));
   </script>
-
 </body>
-
 </html>
