@@ -10,17 +10,19 @@
 </head>
 
 <body>
+    <!--Back button to redirect user to dashboard-->
     <div class="back-button">
         <button type="button" onclick="window.location.href='../userDashboard.html'">
             ← Back
         </button>
     </div>
     <section style="margin-top: 20vh;" class="info-section">
-
+        <!--Questionare to determine user's required emergency resources -->
         <div class="info-left">
             <h2>Tell Us About Yourself</h2>
             <p class="animate-contact-p">
-                To correctly build your survival checklist, we need some information about you and your family. This information will never be shared with third-party organizations.
+                To correctly build your survival checklist, we need some information about you and your family. This
+                information will never be shared with third-party organizations.
             </p>
         </div>
 
@@ -42,7 +44,7 @@
                     <textarea name="message" rows="5" required></textarea>
                 </div>
 
-
+                <!--Submission for questionare, takes user to checklist-->
                 <div class="form-submit">
                     <button type="button" onclick="window.location.href='checklist.html'">Submit</button>
                 </div>
