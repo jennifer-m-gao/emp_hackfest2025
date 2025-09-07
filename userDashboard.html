@@ -107,7 +107,7 @@
         color: rgb(201, 38, 38);
         border-width: 3px;
         width: 40vw;
-        height: 7vh;
+        height: fit-content;
         margin-top: 1.5vh;
         font-size: 125%;
         left: 35%;
@@ -120,7 +120,7 @@
       color: rgb(201, 38, 38);
       border:none;
       left: 35.5%;
-      z-index:9999
+      z-index:9999;
     }
 
     .back-button {
@@ -155,7 +155,8 @@
 
 <body>
   <button class="alert" id="alert-button">ALERT! 5.0 magnitude earthquake reported in your region!</button>
-  <button class = "x-button" id = "x" onclick="removeAlert()">x</button>
+  <button class = "x-button" id = "x" onclick="removeAlert()"><b>x</b></button>
+
   <div class="layout">
 
     <div class="sidebar-left">
@@ -372,7 +373,7 @@
       .bindPopup(`<b> ${yourName} <br /> Current Location</b><br/>`);
 
     proj4.defs("EPSG:2285", "+proj=lcc +lat_1=48.73333333333333 +lat_2=47.5 +lat_0=47 +lon_0=-120.8333333333333 +x_0=500000.0000000001 +y_0=0 +datum=NAD83 +units=us-ft +no_defs +type=crs");
-  
+    
     function removeAlert() {
       document.getElementById("alert-button").style.display = 'none';
       document.getElementById("x").style.display = 'none';
