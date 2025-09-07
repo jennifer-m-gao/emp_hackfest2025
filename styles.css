@@ -280,7 +280,7 @@ h2 {
     background-color: #b4b4b4dd;
     border-radius: 4px;
     font-size: 0.8rem;
-    color: var(--white);
+    color: black;
     resize: vertical;
 }
 

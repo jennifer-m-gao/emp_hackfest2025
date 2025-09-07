@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AidLink</title>
-    <link rel="stylesheet" href="..\styles.css">
+    <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 
 <body>
     <div class="back-button">
-        <button type="button" onclick="window.location.href='index.html'">
+        <button type="button" onclick="window.location.href='../index.html'">
             ← Back
         </button>
     </div>
@@ -49,12 +49,18 @@
 
 
                 <div class="form-submit">
-                    <button type="button" onclick="window.location.href='sync.html'">Create</button>
+                    <button type="button" onclick="saveAndRedirect()">Create</button>
                 </div>
             </form>
         </div>
     </section>
-
+    <script>
+        function saveAndRedirect() {
+            const firstName = document.querySelector("input[name='firstName']").value;
+            localStorage.setItem("firstName", firstName);
+            window.location.href = "sync.html";
+        }
+    </script>
 
 </body>
 
