@@ -1,68 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Seattle Map – draggable, colored areas, clickable icons</title>
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""
-  />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <link rel="stylesheet" href="..\styles.css">
+
   <style>
-    html, body { height: 100%; margin: 0; }
-    #map { height: 100%; width: 100%; }
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+    }
+
+    #map {
+      height: 100%;
+      width: 100%;
+    }
 
     .leaflet-popup-content-wrapper {
-      background: #1e293b;  
-      color: #f1f5f9;       
-      border-radius: 12px;  
-      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      background: #1e293b;
+      color: #f1f5f9;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
     }
 
     .leaflet-popup-tip {
-      background: #1e293b;   
+      background: #1e293b;
     }
 
 
-    .leaflet-popup-content { font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+    .leaflet-popup-content {
+      font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    }
 
     .popup-content {
-    font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  }
+      font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    }
 
-  .popup-content p {
-    margin: 4px 0;
-  }
+    .popup-content p {
+      margin: 4px 0;
+    }
 
-  .status.stable {
-    color: #22c55e; 
-    font-weight: bold;
-  }
-  .status.serious {
-    color: #eab308; 
-    font-weight: bold;
-  }
-  .status.critical {
-    color: #ef4444;
-    font-weight: bold;
-  }
+    .status.stable {
+      color: #22c55e;
+      font-weight: bold;
+    }
 
+    .status.serious {
+      color: #eab308;
+      font-weight: bold;
+    }
+
+    .status.critical {
+      color: #ef4444;
+      font-weight: bold;
+    }
   </style>
 </head>
+
 <body>
-  <div id="map"></div>
+  <div class="layout">
+    <div class="sidebar-left">
+      <div class="sidebar-logo">
+        <img src="..\logo.png" alt="Logo">
+      </div>
+      <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="checklist.html">Pre-Disaster Checklist</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="help.html" class="help-btn">Get Help</a></li>
+      </ul>
+    </div>
+
+    <div id="map"></div>
+  </div>
   <div id="peopleContainer"></div>
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""
-  ></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script>
     const map = L.map('map', {
-      zoomControl: true, 
-      dragging: true,   
+      zoomControl: true,
+      dragging: true,
     }).setView([47.6062, -122.3321], 9);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -73,7 +95,7 @@
     const areas = [
       {
         name: 'earthquake',
-        color: '#ef4444', 
+        color: '#ef4444',
         coords: [
           [47.863252, -123.254382],
           [47.863252, -121.875549],
@@ -124,100 +146,100 @@
     });
 
     const statuses = [
-        { name: "stable", minHR: 60, maxHR: 100, probability: 0.6, minTemp: 97, maxTemp: 100, icon: greenIcon},
-        { name: "serious", minHR: 40, maxHR: 60, probability: 0.3, minTemp: 95, maxTemp: 96.99, icon: yellowIcon},
-        { name: "critical", minHR: 0, maxHR: 40, probability: 0.1, minTemp: 90, maxTemp: 95, icon: redIcon}
+      { name: "stable", minHR: 60, maxHR: 100, probability: 0.6, minTemp: 97, maxTemp: 100, icon: greenIcon },
+      { name: "serious", minHR: 40, maxHR: 60, probability: 0.3, minTemp: 95, maxTemp: 96.99, icon: yellowIcon },
+      { name: "critical", minHR: 0, maxHR: 40, probability: 0.1, minTemp: 90, maxTemp: 95, icon: redIcon }
     ];
 
     function pickStatus() {
-        const randomNum = Math.floor(Math.random() * 10) + 1;
-        if (randomNum <= 7){
-            return statuses[0];
-        } else if (randomNum <= 9){
-            return statuses[1];
-        } else {
-            return statuses[2];
-        }   
+      const randomNum = Math.floor(Math.random() * 10) + 1;
+      if (randomNum <= 7) {
+        return statuses[0];
+      } else if (randomNum <= 9) {
+        return statuses[1];
+      } else {
+        return statuses[2];
+      }
     }
 
-    function Person(age, gender, X, Y){
-        this.age = age;
-        this.gender = gender;
-        this.X = X;
-        this.Y = Y;
-        this.status = pickStatus();
-        this.heartRate = Math.random() * (this.status.maxHR - this.status.minHR) + this.status.minHR;
-        this.bodyTemp = Math.random() * (this.status.maxTemp - this.status.minTemp) + this.status.minTemp;
+    function Person(age, gender, X, Y) {
+      this.age = age;
+      this.gender = gender;
+      this.X = X;
+      this.Y = Y;
+      this.status = pickStatus();
+      this.heartRate = Math.random() * (this.status.maxHR - this.status.minHR) + this.status.minHR;
+      this.bodyTemp = Math.random() * (this.status.maxTemp - this.status.minTemp) + this.status.minTemp;
     }
 
-    function updatePerson(person){
-        let change;
-        switch(person.status.name) {
-            case "stable":
-                change = Math.random() * 1;
-                break;
-            case "serious":
-                change = Math.random() * 2;
-                break;
-            case "critical":
-                change = Math.random() * 4;
-                break;
-        }
+    function updatePerson(person) {
+      let change;
+      switch (person.status.name) {
+        case "stable":
+          change = Math.random() * 1;
+          break;
+        case "serious":
+          change = Math.random() * 2;
+          break;
+        case "critical":
+          change = Math.random() * 4;
+          break;
+      }
 
-        if (Math.random() > 0.5) {
-            change -= change;
-        } else {
-            person.heartRate += change;
-        }
+      if (Math.random() > 0.5) {
+        change -= change;
+      } else {
+        person.heartRate += change;
+      }
 
-        // Clamp heartRate to realistic range (20–200 bpm)
-        if (person.heartRate < 20) person.heartRate = 20;
-        if (person.heartRate > 200) person.heartRate = 200;
+      // Clamp heartRate to realistic range (20–200 bpm)
+      if (person.heartRate < 20) person.heartRate = 20;
+      if (person.heartRate > 200) person.heartRate = 200;
 
-        if (person.heartRate > 60){
-            person.status = statuses[0];
-        } else if (person.heartRate > 40){
-            person.status = statuses[1];
-        } else {
-            person.status = statuses[2];
-        }
+      if (person.heartRate > 60) {
+        person.status = statuses[0];
+      } else if (person.heartRate > 40) {
+        person.status = statuses[1];
+      } else {
+        person.status = statuses[2];
+      }
 
-        let chance = Math.random();
-        switch(person.status.name){
-            case "stable":
-              if (chance > 0.5){
-                person.bodyTemp += Math.random() * 2;
-              } else {
-                person.bodyTemp -= Math.random() * 2;
-              }
-              break;
-            case "serious":
-              if (chance > 0.5){
-                person.bodyTemp += Math.random() * 3;
-              } else {
-                person.bodyTemp -= Math.random() * 3;
-              }
-              break;
-            case "critical":
-              if (chance > 0.5){
-                person.bodyTemp += Math.random() * 4;
-              } else {
-                person.bodyTemp -= Math.random() * 4;
-              }
-              break;
-        }
+      let chance = Math.random();
+      switch (person.status.name) {
+        case "stable":
+          if (chance > 0.5) {
+            person.bodyTemp += Math.random() * 2;
+          } else {
+            person.bodyTemp -= Math.random() * 2;
+          }
+          break;
+        case "serious":
+          if (chance > 0.5) {
+            person.bodyTemp += Math.random() * 3;
+          } else {
+            person.bodyTemp -= Math.random() * 3;
+          }
+          break;
+        case "critical":
+          if (chance > 0.5) {
+            person.bodyTemp += Math.random() * 4;
+          } else {
+            person.bodyTemp -= Math.random() * 4;
+          }
+          break;
+      }
 
-        // Clamp bodyTemp to realistic human range (80–110 °F)
-        if (person.bodyTemp < 80) person.bodyTemp = 80;
-        if (person.bodyTemp > 110) person.bodyTemp = 110;
+      // Clamp bodyTemp to realistic human range (80–110 °F)
+      if (person.bodyTemp < 80) person.bodyTemp = 80;
+      if (person.bodyTemp > 110) person.bodyTemp = 110;
 
-        if (person.bodyTemp < 95){
-          person.status = statuses[2];
-        } else if (person.bodyTemp < 97){
-          person.status = statuses[1];
-        } else {
-          person.status = statuses[0];
-        }
+      if (person.bodyTemp < 95) {
+        person.status = statuses[2];
+      } else if (person.bodyTemp < 97) {
+        person.status = statuses[1];
+      } else {
+        person.status = statuses[0];
+      }
     }
 
 
@@ -255,7 +277,7 @@
           <p><strong>Body Temperature:</strong> ${Math.round(person.bodyTemp)} °F</p>
           <p class="status ${person.status.name}"><strong>Status:</strong> ${person.status.name}</p>
         </div>
-      `; 
+      `;
     }
 
     people.forEach(person => {
@@ -280,14 +302,15 @@
 
 
     function onMapClick(e) {
-        L.popup()
-          .setLatLng(e.latlng)
-          .setContent("You clicked the map at " + e.latlng.toString())
-          .openOn(map);
+      L.popup()
+        .setLatLng(e.latlng)
+        .setContent("You clicked the map at " + e.latlng.toString())
+        .openOn(map);
     }
 
     map.on('click', onMapClick);
   </script>
 
 </body>
+
 </html>
