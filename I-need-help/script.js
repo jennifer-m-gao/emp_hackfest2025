@@ -64,7 +64,7 @@ Array.from(ams).forEach(element => {
     else {
       amenities.push(value);
     }
-    person['name'] = 'Bob';
+    person['name'] = JSON.parse(localStorage.getItem('firstName')) || 'User';
     person["amenities"] = [...amenities];
     testperson.textContent = "Current Entry: " + JSON.stringify(person);
   })
