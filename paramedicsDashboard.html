@@ -300,31 +300,32 @@
     const people = [];
     const markers = [];
 
-    people.push(new Person(32, "female", 47.6097, -122.3331, '', '9'));
-    people.push(new Person(45, "male", 47.6205, -122.3493, '', '9'));
-    people.push(new Person(27, "female", 47.6550, -122.3080, '', '9'));
-    people.push(new Person(53, "male", 47.5301, -122.0326, '', '9'));
-    people.push(new Person(19, "female", 47.7557, -122.3415, '', '9'));
-    people.push(new Person(68, "male", 47.3073, -122.2285, '', '9'));
-    people.push(new Person(8, "female", 47.4874, -122.2171, '', '9'));
-    people.push(new Person(39, "male", 47.6786, -122.1316, '', '9'));
-    people.push(new Person(24, "female", 47.6104, -122.2007, '', '9'));
-    people.push(new Person(60, "male", 47.4490, -122.3088, '', '9'));
-    people.push(new Person(72, "female", 47.5407, -122.3877, '', '9'));
-    people.push(new Person(34, "male", 47.6156, -122.2119, '', '9'));
-    people.push(new Person(51, "female", 47.4047, -122.3243, '', '9'));
-    people.push(new Person(12, "male", 47.6790, -122.3870, '', '9'));
-    people.push(new Person(83, "female", 47.7430, -122.1731, '', '9'));
-    people.push(new Person(28, "female", 47.6782, -122.1760, '', '9'));
-    people.push(new Person(36, "male", 47.7557, -122.3076, '', '9'));
-    people.push(new Person(47, "female", 47.7089, -122.2030, '', '9'));
-    people.push(new Person(22, "male", 47.6739, -122.1215, '', '9'));
-    people.push(new Person(55, "female", 47.8209, -122.3151, '', '9'));
+  people.push(new Person('Angela', 32, "female", 47.6097, -122.3331, '', '9'));
+  people.push(new Person('James', 45, "male", 47.6205, -122.3493, '', '9'));
+  people.push(new Person('Selena', 27, "female", 47.6550, -122.3080, '', '9'));
+  people.push(new Person('Johnathon', 53, "male", 47.5301, -122.0326, '', '9'));
+  people.push(new Person('Rihanna', 19, "female", 47.7557, -122.3415, '', '9'));
+  people.push(new Person('Oliver', 68, "male", 47.3073, -122.2285, '', '9'));
+  people.push(new Person('Poppy', 8, "female", 47.4874, -122.2171, '', '9'));
+  people.push(new Person('Taj', 39, "male", 47.6786, -122.1316, '', '9'));
+  people.push(new Person('Carla', 24, "female", 47.6104, -122.2007, '', '9'));
+  people.push(new Person('Gibson', 60, "male", 47.4490, -122.3088, '', '9'));
+  people.push(new Person('Rhonda', 72, "female", 47.5407, -122.3877, '', '9'));
+  people.push(new Person('Tyler', 34, "male", 47.6156, -122.2119, '', '9'));
+  people.push(new Person('Vivian', 51, "female", 47.4047, -122.3243, '', '9'));
+  people.push(new Person('Aditya', 12, "male", 47.6790, -122.3870, '', '9'));
+  people.push(new Person('Betty', 83, "female", 47.7430, -122.1731, '', '9'));
+  people.push(new Person('Kiara', 28, "female", 47.6782, -122.1760, '', '9'));
+  people.push(new Person('Brett', 36, "male", 47.7557, -122.3076, '', '9'));
+  people.push(new Person('Brook', 47, "female", 47.7089, -122.2030, '', '9'));
+  people.push(new Person('Jim', 22, "male", 47.6739, -122.1215, '', '9'));
+  people.push(new Person('Emma', 55, "female", 47.8209, -122.3151, '', '9'));
 
 
     function getPopupContent(person){
       return `
         <div class="popup-content">
+          <p><strong>Name:</strong> ${person.name}</p>
           <p><strong>Age:</strong> ${person.age}</p>
           <p><strong>Gender:</strong> ${person.gender}</p>
           <p><strong>Heart rate:</strong> ${Math.round(person.heartRate)} bpm</p>
@@ -337,15 +338,17 @@
     }
 
 
-    people.push(new Person(32,"female",47.6097,-122.3331,"food, water, communication",2));
-    people.push(new Person(45,"male",47.6205,-122.3493,"first aid",7));
+    people.push(new Person('Wendy',32,"female",47.6097,-122.3331,"food, water, communication",2));
+    people.push(new Person('Richard',45,"male",47.6205,-122.3493,"first aid",7));
 
     const submissions = JSON.parse(localStorage.getItem('submissions')) || [];
     function simulateSubmission(sub){
+      const name =  JSON.parse(localStorage.getItem('firstName')) || 'User';
       const lat = 47.60 + (Math.random()-0.5)*0.1;
       const long = -122.33 + (Math.random()-0.5)*0.1;
       const gender = Math.random()>0.5?"male":"female";
       const p = new Person(
+        name,
         Math.floor(Math.random()*61)+10,
         gender,
         lat,long,
