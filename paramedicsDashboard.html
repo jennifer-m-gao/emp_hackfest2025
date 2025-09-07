@@ -14,23 +14,41 @@
     html, body { height: 100%; margin: 0; }
     #map { height: 100%; width: 100%; }
 
+    .leaflet-popup-content-wrapper {
+      background: #1e293b;  
+      color: #f1f5f9;       
+      border-radius: 12px;  
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+
+    .leaflet-popup-tip {
+      background: #1e293b;   
+    }
+
+
     .leaflet-popup-content { font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
 
-    .pin {
-      width: 22px; height: 22px; border-radius: 50%;
-      background: #1d4ed8; 
-      display: grid; place-items: center; color: white; font-size: 12px; font-weight: 700;
-      box-shadow: 0 1px 4px rgba(0,0,0,.4);
-      transform: translate(-11px, -11px);
-    }
-    .pin::after { 
-      content: "";
-      position: absolute;
-      width: 0; height: 0; left: 9px; top: 18px;
-      border-left: 4px solid transparent;
-      border-right: 4px solid transparent;
-      border-top: 8px solid #1d4ed8;
-    }
+    .popup-content {
+    font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .popup-content p {
+    margin: 4px 0;
+  }
+
+  .status.stable {
+    color: #22c55e; 
+    font-weight: bold;
+  }
+  .status.serious {
+    color: #eab308; 
+    font-weight: bold;
+  }
+  .status.critical {
+    color: #ef4444;
+    font-weight: bold;
+  }
+
   </style>
 </head>
 <body>
@@ -107,8 +125,8 @@
 
     const statuses = [
         { name: "stable", minHR: 60, maxHR: 100, probability: 0.6, minTemp: 97, maxTemp: 100, icon: greenIcon},
-        { name: "critical", minHR: 40, maxHR: 60, probability: 0.3, minTemp: 95, maxTemp: 96.99, icon: yellowIcon},
-        { name: "dying", minHR: 0, maxHR: 40, probability: 0.1, minTemp: 90, maxTemp: 95, icon: redIcon}
+        { name: "serious", minHR: 40, maxHR: 60, probability: 0.3, minTemp: 95, maxTemp: 96.99, icon: yellowIcon},
+        { name: "critical", minHR: 0, maxHR: 40, probability: 0.1, minTemp: 90, maxTemp: 95, icon: redIcon}
     ];
 
     function pickStatus() {
@@ -138,14 +156,23 @@
             case "stable":
                 change = Math.random() * 1;
                 break;
-            case "critical":
+            case "serious":
                 change = Math.random() * 2;
                 break;
-            case "dying":
+            case "critical":
                 change = Math.random() * 4;
                 break;
         }
-        person.heartRate += change;
+
+        if (Math.random() > 0.5) {
+            change -= change;
+        } else {
+            person.heartRate += change;
+        }
+
+        // Clamp heartRate to realistic range (20–200 bpm)
+        if (person.heartRate < 20) person.heartRate = 20;
+        if (person.heartRate > 200) person.heartRate = 200;
 
         if (person.heartRate > 60){
             person.status = statuses[0];
@@ -164,14 +191,14 @@
                 person.bodyTemp -= Math.random() * 2;
               }
               break;
-            case "critical":
+            case "serious":
               if (chance > 0.5){
                 person.bodyTemp += Math.random() * 3;
               } else {
                 person.bodyTemp -= Math.random() * 3;
               }
               break;
-            case "dying":
+            case "critical":
               if (chance > 0.5){
                 person.bodyTemp += Math.random() * 4;
               } else {
@@ -179,24 +206,56 @@
               }
               break;
         }
+
+        // Clamp bodyTemp to realistic human range (80–110 °F)
+        if (person.bodyTemp < 80) person.bodyTemp = 80;
+        if (person.bodyTemp > 110) person.bodyTemp = 110;
+
         if (person.bodyTemp < 95){
           person.status = statuses[2];
         } else if (person.bodyTemp < 97){
           person.status = statuses[1];
         } else {
           person.status = statuses[0];
-        };
+        }
     }
+
 
     const people = [];
     const markers = [];
 
-    people.push(new Person(30, "female", 47.6062, -122.3321));
-    people.push(new Person(25, "male", 47.6205, -122.3493));
-    people.push(new Person(65, "male", 47.5952, -122.3316));
+    people.push(new Person(32, "female", 47.6097, -122.3331));
+    people.push(new Person(45, "male", 47.6205, -122.3493));
+    people.push(new Person(27, "female", 47.6550, -122.3080));
+    people.push(new Person(53, "male", 47.5301, -122.0326));
+    people.push(new Person(19, "female", 47.7557, -122.3415));
+    people.push(new Person(68, "male", 47.3073, -122.2285));
+    people.push(new Person(8, "female", 47.4874, -122.2171));
+    people.push(new Person(39, "male", 47.6786, -122.1316));
+    people.push(new Person(24, "female", 47.6104, -122.2007));
+    people.push(new Person(60, "male", 47.4490, -122.3088));
+    people.push(new Person(72, "female", 47.5407, -122.3877));
+    people.push(new Person(34, "male", 47.6156, -122.2119));
+    people.push(new Person(51, "female", 47.4047, -122.3243));
+    people.push(new Person(12, "male", 47.6790, -122.3870));
+    people.push(new Person(83, "female", 47.7430, -122.1731));
+    people.push(new Person(28, "female", 47.6782, -122.1760));
+    people.push(new Person(36, "male", 47.7557, -122.3076));
+    people.push(new Person(47, "female", 47.7089, -122.2030));
+    people.push(new Person(22, "male", 47.6739, -122.1215));
+    people.push(new Person(55, "female", 47.8209, -122.3151));
+
 
     function getPopupContent(person) {
-      return `Age: ${person.age}<br/> Gender: ${person.gender}<br/> Heart rate: ${Math.round(person.heartRate)} bpm<br/> Body Temperature: ${Math.round(person.bodyTemp)}°F<br/> Status: ${person.status.name}`;
+      return `
+        <div class="popup-content">
+          <p><strong>Age:</strong> ${person.age}</p>
+          <p><strong>Gender:</strong> ${person.gender}</p>
+          <p><strong>Heart rate:</strong> ${Math.round(person.heartRate)} bpm</p>
+          <p><strong>Body Temperature:</strong> ${Math.round(person.bodyTemp)} °F</p>
+          <p class="status ${person.status.name}"><strong>Status:</strong> ${person.status.name}</p>
+        </div>
+      `; 
     }
 
     people.forEach(person => {
