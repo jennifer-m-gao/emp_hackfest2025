@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>AidLink User Profile</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <style>
+        .profile{
+            display:block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .info-item{
+            padding: 5px;
+        }
+
+        .info-list{
+            text-align: left;
+            padding-left: 35%;
+            
+        }
+
+    </style>
+
+    <body>
+        <!--page navigation bar and logo-->
+        <nav class="navbar">
+            <div class="nav-left">
+                <img src="media/logo.png" alt="Logo" class="logo">
+            </div>
+
+            <div class="nav-right">
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+
+        <!--collapsable sidebar bar-->
+        <div class="sidebar" id="sidebar">
+            <ul>
+                <li><a href="paramedicsDashboard.html">Dashboard</a></li>
+                <li><a href="paramedicsProfile.html">Profile</a></li>
+            </ul>
+        </div>
+
+        <div style="padding-top: 100px; text-align: center;">
+            <!--profile icon-->
+            <img src="media/profile-icon.png" width="150px" class="profile">
+
+            <!--display name and other profile info-->
+            <h2 id="display-name">Johnathan Doe</h2>  
+
+            <!--display for age, gender, height, weight, etc.-->
+            <div class="info-list">
+                <ul>
+                    <li class="info-item" id="organization-info">Organization: Redmond Fire Department</li>
+                    <li class="info-item" id="age-info">Age: 35</li>
+                    <li class="info-item" id="gender-info">Gender: male</li>
+                    <li class="info-item" id="height-info">Height: 5'9"</li>
+                    <li class="info-item" id="weight-info">Weight: 160lbs</li>
+                </ul>
+            </div>  
+        </div>
+
+        <script>
+            //script for navbar
+            const hamburger = document.getElementById('hamburger');
+            const sidebar = document.getElementById('sidebar');
+    
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                sidebar.classList.toggle('open');
+            });
+
+            
+            
+            
+        </script>
+        
+    </body>
+</html>
