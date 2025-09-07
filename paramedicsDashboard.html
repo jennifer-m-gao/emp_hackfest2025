@@ -94,6 +94,7 @@
       color: #f1f5f9;       
       border-radius: 12px;  
       box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      z-index: 1200;
     }
 
     .leaflet-popup-tip {
@@ -137,6 +138,34 @@
       z-index: 1000;
   }
 
+  back-button {
+        background-color: var(--white);
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .back-button button {
+        margin-top: 40vh;
+        margin-left: 3.65vw;
+        padding: 0.65rem 1.45rem;
+        background-color: var(--white);
+        color: var(--dark-green);
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+        font-family: 'Inter', sans-serif;
+        font-size: 1.15rem;
+        transition: background-color 0.25s ease, transform 0.2s ease;
+        border: 2px solid white;
+    }
+
+    .back-button button:hover {
+        background-color: #f1e9c8;
+        transform: translateY(-2px);
+    }
+
   </style>
 </head>
 <body>
@@ -149,6 +178,11 @@
       <ul>
         <li><a href="paramedicsDashboard.html">Dashboard</a></li>
         <li><a href="userDashboard.html">Profile</a></li>
+        <div class="back-button">
+            <button type="button" onclick="window.location.href='index.html'">
+                ← Logout
+            </button>
+        </div>
       </ul>
     </div>
 

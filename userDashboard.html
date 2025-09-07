@@ -14,7 +14,6 @@
       margin: 0; 
       font-family: 'Inter', sans-serif;
     }
-    #map { height: 100%; width: 80%; }
 
     /*dif sidebar*/
     .layout {
@@ -65,24 +64,18 @@
     .sidebar-left .help-btn {
         background-color: #ffffff;
         color: #b62222 !important;
-        text-align: center;
+        text-align: left;
         border-radius: 4px;
     }
 
     .sidebar-left .help-btn:hover {
-        background-color: #c49f25;
+        background-color: #e2d9bb;
     }
-
-    .page-content {
-        padding-top: 60px; 
-        padding-left: 250px; 
-        padding-right: 1rem;
-    }
-
-
 
     #map {
-      flex: 1; /* take up remaining space */
+      flex: 1; 
+      height: 100vh;
+      width: 100%;
     }
 
 
@@ -101,25 +94,53 @@
     .leaflet-popup-content { font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
 
     .popup-content {
-    font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  }
+      font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    }
 
-  .popup-content p {
-    margin: 4px 0;
-  }
+    .popup-content p {
+      margin: 4px 0;
+    }
 
-  .alert {
-      position:fixed;
-      border-color: rgb(201, 38, 38);
-      color: rgb(201, 38, 38);
-      border-width: 3px;
-      width: 40vw;
-      height: 7vh;
-      margin-top: 1.5vh;
-      font-size: 125%;
-      left: 35%;
-      z-index: 1000;
-  }
+    .alert {
+        position:fixed;
+        border-color: rgb(201, 38, 38);
+        color: rgb(201, 38, 38);
+        border-width: 3px;
+        width: 40vw;
+        height: 7vh;
+        margin-top: 1.5vh;
+        font-size: 125%;
+        left: 35%;
+        z-index: 1000;
+    }
+
+    .back-button {
+        background-color: var(--white);
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .back-button button {
+        margin-top: 40vh;
+        margin-left: 3.65vw;
+        padding: 0.65rem 1.45rem;
+        background-color: var(--white);
+        color: var(--dark-green);
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+        font-family: 'Inter', sans-serif;
+        font-size: 1.15rem;
+        transition: background-color 0.25s ease, transform 0.2s ease;
+        border: 2px solid white;
+    }
+
+    .back-button button:hover {
+        background-color: #f1e9c8;
+        transform: translateY(-2px);
+    }
   </style>
 </head>
 
@@ -136,6 +157,11 @@
         <li><a href="../Checklist/checklist.html">Pre-Disaster Checklist</a></li>
         <li><a href="userDashboard.html">Profile</a></li>
         <li><a href="../I-need-help/index.html" class="help-btn">Get Help</a></li>
+        <div class="back-button">
+            <button type="button" onclick="window.location.href='index.html'">
+                ← Logout
+            </button>
+        </div>
       </ul>
     </div>
 
@@ -145,7 +171,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script>
-    const yourName = JSON.parse(localStorage.getItem('firstName')) || 'User';
+    const yourName = localStorage.getItem('firstName') || 'User';
     const map = L.map('map', {
       minZoom: 10,
       maxZoom: 16,
